@@ -71,7 +71,7 @@ def reset_params():
 def set_params():
   print("Please enter parameters on the physical interface.\n")
   while param_step < constants.NUM_PARAMS:
-    tmp = read_pot()
+    tmp = int(read_pot() * 10) / 10
     display.set_display([
       param_step+1,
       ' ',
