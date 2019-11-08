@@ -43,23 +43,20 @@ for i in range(len(pins_digits)):
 def set_individual(digit, val):
   # which LEDs to enable
   leds = num[str(val)]
-  # enable the digit
+  # disable all digits
   for d in range(len(digits)):
-    if d == digit:
-      # enable
-      digits[d].off()
-    else:
-      # disable
-      digits[d].on()
+    digits[d].on()
   # enable/disable corresponding segments
   for j in range(len(segments)):
     if leds[j]:
       segments[j].on()
     else:
       segments[j].off()
+  # enable specific digit
+  digits[digit].off()
 
 # set the display to a certain set of values, ex: ['1',' ','2','4']
 def set_display(vals):
   for i, val in enumerate(vals):
     set_individual(i, val)
-    sleep(0.001)
+    sleep(0.005)
