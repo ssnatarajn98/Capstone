@@ -33,7 +33,12 @@ def button_reset():
 toggleButton.when_pressed = toggle
 resetButton.when_held = button_reset
 
+avg = 0
 while True:
-  print(pot.value)
+  for i in range(10):
+    avg += pot.value
+    sleep(0.05)
+  print(avg / 10)
+  avg = 0
 
 pause()
