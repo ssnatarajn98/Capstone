@@ -90,8 +90,10 @@ resetButton.when_held = button_reset
 
 ''' BEGIN SCRIPT '''
 
-while True:
-  display.set_display([1,2,3,4])
+display.set_individual(0,5)
+
+#while True:
+#  display.set_display([1,2,3,4])
 
 #set_params()
 
