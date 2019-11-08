@@ -16,8 +16,8 @@ import gpiozero # uses BCM numbering by default
 import constants
 
 ''' GLOBAL VARIABLES '''
-toggleButton = gpiozero.Button(24)
-resetButton = gpiozero.Button(7, hold_time=3)
+#toggleButton = gpiozero.Button(constants.TOGGLE_BUTTON)
+resetButton = gpiozero.Button(constants.RESET_BUTTON, hold_time=3)
 
 ''' AUXILIARY FUNCTIONS '''
 def toggle():
@@ -29,8 +29,11 @@ def button_reset():
   print("Device reset triggered!")
 
 ''' SETUP '''
-toggleButton.when_pressed = toggle
+#toggleButton.when_pressed = toggle
 resetButton.when_held = button_reset
+
+led = gpiozero.LED(constants.TOGGLE_BUTTON)
+led.on()
 
 while True:
   i = 0
