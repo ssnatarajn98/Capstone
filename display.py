@@ -59,4 +59,4 @@ def set_individual(digit, val):
 def set_display(vals):
   for i, val in enumerate(vals):
     set_individual(i, val)
-    sleep(0.005)
+    sleep(0.001)
