@@ -17,7 +17,7 @@ import constants
 
 ''' GLOBAL VARIABLES '''
 toggleButton = gpiozero.Button(constants.TOGGLE_BUTTON)
-resetButton = gpiozero.Button(constants.RESET_BUTTON, hold_time=3)
+#resetButton = gpiozero.Button(constants.RESET_BUTTON, hold_time=2)
 
 ''' AUXILIARY FUNCTIONS '''
 def toggle():
@@ -30,7 +30,14 @@ def button_reset():
 
 ''' SETUP '''
 toggleButton.when_pressed = toggle
-resetButton.when_held = button_reset
+#resetButton.when_held = button_reset
+
+led = gpiozero.LED(constants.RESET_BUTTON)
+while True:
+  led.on()
+  sleep(0.25)
+  led.off()
+  sleep(0.25)
 
 pause()
 
