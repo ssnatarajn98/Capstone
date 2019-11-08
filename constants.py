@@ -2,6 +2,9 @@
 Constant values used across all files
 '''
 
+''' GPIO PINS '''
+
+# Buttons
 TOGGLE_BUTTON = 24
 RESET_BUTTON = 7
 
@@ -22,3 +25,10 @@ SEGMENT_D = 27
 SEGMENT_E = 23
 SEGMENT_F = 25
 SEGMENT_DOT = 12
+
+''' PARAMETER SELECTION '''
+NUM_PARAMS = 2
+PARAM_NAMES = [
+  "Flight altitude",
+  "Lateral distance"
+]
