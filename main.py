@@ -75,8 +75,8 @@ def set_params():
     display.set_display([
       param_step+1,
       ' ',
-      ' ' if (tmp == 0) else tmp,
-      int((tmp - int(tmp)) * 10)
+      ' ' if (int(tmp) == 0) else tmp, # if first digit is zero dont show
+      int((tmp - int(tmp)) * 10) # ones place
       ])
     print(tmp)
 
