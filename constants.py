@@ -3,6 +3,7 @@ Constant values used across all files
 '''
 
 TOGGLE_BUTTON = 24
+RESET_BUTTON = 7
 
 # Motor driver
 MOTOR_DIRECTION = 16
