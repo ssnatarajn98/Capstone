@@ -16,7 +16,7 @@ import constants
 
 ''' GLOBAL VARIABLES '''
 toggleButton = Button(constants.TOGGLE_BUTTON)
-resetButton = Button(constants.TOGGLE_BUTTON, hold_time=3)
+resetButton = Button(constants.RESET_BUTTON, hold_time=3)
 
 ''' AUXILIARY FUNCTIONS '''
 def toggle():
