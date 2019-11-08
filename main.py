@@ -73,10 +73,10 @@ def set_params():
   while param_step < constants.NUM_PARAMS:
     tmp = read_pot()
     display.set_display([
-      str(param_step),
+      param_step,
       ' ',
-      str(int(tmp)),
-      str(int((tmp - int(tmp) * 10)))
+      int(tmp),
+      int((tmp - int(tmp)) * 10)
       ])
 
 def button_reset():
@@ -90,8 +90,7 @@ resetButton.when_held = button_reset
 
 ''' BEGIN SCRIPT '''
 
-while True:
-  display.set_display([1,2,3,4])
+set_params()
 
 #set_params()
 
