@@ -39,27 +39,27 @@ digits = []
 for i in range(len(pins_digits)):
   digits.append(gpiozero.LED(pins_digits[i]))
 
+# set digit 0, 1, 2, or 3 to a number
+def set_individual(digit, val):
+  # which LEDs to enable
+  leds = num[val]
+  # enable the digit
+  for d in range(len(digits)):
+    if d == i:
+      # enable
+      digits[d].off()
+    else:
+      # disable
+      digits[d].on()
+  # enable/disable corresponding segments
+  for j in range(len(segments)):
+    if leds[j]:
+      segments[j].on()
+    else:
+      segments[j].off()
+
 # set the display to a certain set of values, ex: ['1',' ','2','4']
 def set_display(vals):
   for i, val in enumerate(vals):
-    # which LEDs to enable
-    leds = num[val]
-    # enable the digit
-    for d in range(len(digits)):
-      if d == i:
-        # enable
-        digits[d].off()
-      else:
-        # disable
-        digits[d].on()
-    # enable/disable corresponding segments
-    for j in range(len(segments)):
-      if leds[j]:
-        segments[j].on()
-      else:
-        segments[j].off()
+    set_individual(i, val)
     sleep(0.001)
-
-def display_off():
-  set_display([' '] * 4)
-

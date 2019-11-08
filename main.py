@@ -89,10 +89,8 @@ toggleButton.when_pressed = toggle
 resetButton.when_held = button_reset
 
 ''' BEGIN SCRIPT '''
-display.display_off()
 
-while True:
-  display.set_display(['1','2','3','4'])
+display.set_individual(0, 8)
 
 #set_params()
 
