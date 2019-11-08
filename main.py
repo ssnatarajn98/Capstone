@@ -90,7 +90,7 @@ resetButton.when_held = button_reset
 
 ''' BEGIN SCRIPT '''
 
-display.set_individual(0, 8)
+display.set_individual(0, '8')
 
 #set_params()
 
