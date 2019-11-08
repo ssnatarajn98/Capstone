@@ -29,4 +29,4 @@ def button_reset():
 
 ''' SETUP '''
 toggleButton.when_pressed = toggle
-resetButton.when_held = resetButton
+resetButton.when_held = button_reset
