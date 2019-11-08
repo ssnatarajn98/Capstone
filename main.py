@@ -46,7 +46,7 @@ def toggle():
   # read from the pot and save the value
   print("Toggled!")
   reading = read_pot()
-  print("Saved value #" + str(param_step + 1) + ": " + str(reading))
+  print("Saved value " + constants.PARAM_NAMES[param_step] + ": " + str(reading))
   params[param_step] = reading
 
   # ready to read the next parameter
