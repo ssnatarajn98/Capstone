@@ -32,6 +32,7 @@ def button_reset():
 toggleButton.when_pressed = toggle
 resetButton.when_held = button_reset
 
+pause()
 
 '''
 leds = []
