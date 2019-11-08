@@ -91,6 +91,9 @@ resetButton.when_held = button_reset
 ''' BEGIN SCRIPT '''
 display.display_off()
 
-set_params()
+while True:
+  display.set_display(['1','2','3','4'])
+
+#set_params()
 
 pause()
