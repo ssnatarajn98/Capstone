@@ -29,10 +29,15 @@ def button_reset():
   print("Device reset triggered!")
 
 ''' SETUP '''
-toggleButton.when_pressed = toggle
-resetButton.when_held = button_reset
+#toggleButton.when_pressed = toggle
+#resetButton.when_held = button_reset
 
-pause()
+while True:
+  if toggleButton.is_pressed:
+    print("Pressed!")
+  else:
+    print("Not pressed...")
+  sleep(1)
 
 '''
 leds = []
