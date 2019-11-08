@@ -28,5 +28,5 @@ def button_reset():
   print("Device reset triggered!")
 
 ''' SETUP '''
-button.when_pressed = toggle
-button.when_held = resetButton
+toggleButton.when_pressed = toggle
+resetButton.when_held = resetButton
