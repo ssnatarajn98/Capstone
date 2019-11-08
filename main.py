@@ -16,8 +16,9 @@ import gpiozero # uses BCM numbering by default
 import constants
 
 ''' GLOBAL VARIABLES '''
-toggleButton = gpiozero.Button(constants.TOGGLE_BUTTON)
-resetButton = gpiozero.Button(constants.RESET_BUTTON, hold_time=3)
+#toggleButton = gpiozero.Button(constants.TOGGLE_BUTTON)
+#resetButton = gpiozero.Button(constants.RESET_BUTTON, hold_time=3)
+toggleButton = gpiozero.Button(7)
 
 ''' AUXILIARY FUNCTIONS '''
 def toggle():
@@ -32,12 +33,16 @@ def button_reset():
 #toggleButton.when_pressed = toggle
 #resetButton.when_held = button_reset
 
+led = gpiozero.LED(24)
 while True:
   if toggleButton.is_pressed:
     print("Pressed!")
   else:
     print("Not pressed...")
-  sleep(1)
+  led.on()
+  sleep(0.5)
+  led.off()
+  sleep(0.5)
 
 '''
 leds = []
