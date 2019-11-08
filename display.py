@@ -60,3 +60,6 @@ def set_display(vals):
   for i, val in enumerate(vals):
     set_individual(i, val)
     sleep(0.001)
+
+def clear():
+  set_display([' '] * 4)

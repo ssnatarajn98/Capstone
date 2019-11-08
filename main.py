@@ -49,7 +49,7 @@ def toggle():
 
   # read from the pot and save the value
   print("Toggled!")
-  reading = read_pot_stable()
+  reading = float(int(read_pot_stable() * 100) / 10.0)
   print("Saved value " + constants.PARAM_NAMES[param_step] + ": " + str(reading))
   params[param_step] = reading
 
@@ -71,14 +71,15 @@ def reset_params():
 def set_params():
   print("Please enter parameters on the physical interface.\n")
   while param_step < constants.NUM_PARAMS:
-    tmp = float(int(read_pot() * 10) / 10.0)
+    tmp = float(int(read_pot() * 100) / 10.0)
+    tmp = 9.9 if (tmp == 10) else tmp # dont allow value to be 10 (not enough digits)
     display.set_display([
-      param_step+1,
+      param_step + 1,
       ' ',
       ' ' if (int(tmp) == 0) else int(tmp), # if first digit is zero dont show
       int((tmp - int(tmp)) * 10) # ones place
       ])
-    print(tmp)
+  display.clear()
 
 def button_reset():
   print("\nDevice reset triggered!\n")
