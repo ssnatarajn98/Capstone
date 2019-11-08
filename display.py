@@ -42,7 +42,7 @@ for i in range(len(pins_digits)):
 # set digit 0, 1, 2, or 3 to a number
 def set_individual(digit, val):
   # which LEDs to enable
-  leds = num[val]
+  leds = num[str(val)]
   # enable the digit
   for d in range(len(digits)):
     if d == i:
