@@ -73,7 +73,7 @@ def set_params():
   while param_step < constants.NUM_PARAMS:
     tmp = read_pot()
     display.set_display([
-      param_step,
+      param_step+1,
       ' ',
       int(tmp),
       int((tmp - int(tmp)) * 10)
