@@ -14,7 +14,7 @@ from signal import pause
 from gpiozero import Button
 # importing files
 import constants
-
+GPIO.setmode(GPIO.BOARD)
 ''' GLOBAL VARIABLES '''
 toggleButton = Button(constants.TOGGLE_BUTTON)
 resetButton = Button(constants.RESET_BUTTON, hold_time=3)
