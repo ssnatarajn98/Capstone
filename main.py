@@ -11,12 +11,13 @@ print("Hello, world!")
 from time import sleep
 from signal import pause
 # raspberry pi packages
-from gpiozero import Button
+import gpiozero # uses BCM numbering by default
 # importing files
 import constants
+
 ''' GLOBAL VARIABLES '''
-toggleButton = Button(constants.TOGGLE_BUTTON)
-resetButton = Button(constants.RESET_BUTTON, hold_time=3)
+toggleButton = gpiozero.Button(24)
+resetButton = gpiozero.Button(7, hold_time=3)
 
 ''' AUXILIARY FUNCTIONS '''
 def toggle():
