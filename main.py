@@ -12,8 +12,9 @@ from time import sleep
 from signal import pause
 # raspberry pi packages
 import gpiozero # uses BCM numbering by default
-# importing files
+# importing local files
 import constants
+import display
 
 ''' GLOBAL VARIABLES '''
 # buttons
@@ -26,9 +27,12 @@ params = [0] * constants.NUM_PARAMS # initialize to zero
 param_step = 0
 
 ''' AUXILIARY FUNCTIONS '''
+def read_pot():
+  return pot.value
+
 # average a few values from the pot
 # in case of an anomaly/error
-def read_pot():
+def read_pot_stable():
   reading = 0
   for i in range(10):
     reading += pot.value
@@ -45,7 +49,7 @@ def toggle():
 
   # read from the pot and save the value
   print("Toggled!")
-  reading = read_pot()
+  reading = read_pot_stable()
   print("Saved value " + constants.PARAM_NAMES[param_step] + ": " + str(reading))
   params[param_step] = reading
 
@@ -67,7 +71,13 @@ def reset_params():
 def set_params():
   print("Please enter parameters on the physical interface.\n")
   while param_step < constants.NUM_PARAMS:
-    sleep(0.001)
+    tmp = read_pot()
+    display.set_display([
+      str(param_step),
+      ' ',
+      str(int(tmp)),
+      str(int((tmp - int(tmp) * 10)))
+      ])
 
 def button_reset():
   print("\nDevice reset triggered!\n")
@@ -79,6 +89,7 @@ toggleButton.when_pressed = toggle
 resetButton.when_held = button_reset
 
 ''' BEGIN SCRIPT '''
+display.display_off()
 
 set_params()
 
