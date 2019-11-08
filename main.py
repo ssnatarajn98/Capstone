@@ -9,6 +9,7 @@ print("Hello, world!")
 ''' IMPORTS '''
 # general packages
 from time import sleep
+from signal import pause
 # raspberry pi packages
 from gpiozero import Button
 # importing files
@@ -30,3 +31,6 @@ def button_reset():
 ''' SETUP '''
 toggleButton.when_pressed = toggle
 resetButton.when_held = resetButton
+
+while True:
+  i = 0
