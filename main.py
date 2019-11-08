@@ -78,6 +78,7 @@ def set_params():
       int(tmp),
       int((tmp - int(tmp)) * 10)
       ])
+    print(tmp)
 
 def button_reset():
   print("\nDevice reset triggered!\n")
@@ -91,7 +92,5 @@ resetButton.when_held = button_reset
 ''' BEGIN SCRIPT '''
 
 set_params()
-
-#set_params()
 
 pause()
