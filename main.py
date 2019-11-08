@@ -39,10 +39,14 @@ def toggle():
   global params
   global param_step
 
+  # ignore button presses after all parameters have been set
+  if param_step >= constants.NUM_PARAMS:
+    return
+
   # read from the pot and save the value
   print("Toggled!")
   reading = read_pot()
-  print("Saved value: " + str(reading))
+  print("Saved value #" + str(param_step + 1) + ": " + str(reading))
   params[param_step] = reading
 
   # ready to read the next parameter
@@ -61,11 +65,12 @@ def reset_params():
   print("Parameters reset.")
 
 def set_params():
+  print("Please enter parameters on the physical interface.\n")
   while param_step < constants.NUM_PARAMS:
     sleep(0.001)
 
 def button_reset():
-  print("Device reset triggered!")
+  print("\nDevice reset triggered!\n")
   reset_params()
   set_params()
 
