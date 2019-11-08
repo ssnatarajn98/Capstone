@@ -45,14 +45,12 @@ def set_individual(digit, val):
   leds = num[str(val)]
   # enable the digit
   for d in range(len(digits)):
-    if d == i:
+    if d == digit:
       # enable
       digits[d].off()
-      print('\tenabling #' + str(d+1))
     else:
       # disable
       digits[d].on()
-      print('\tdisabling #' + str(d+1))
   # enable/disable corresponding segments
   for j in range(len(segments)):
     if leds[j]:
