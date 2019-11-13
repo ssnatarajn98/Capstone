@@ -39,8 +39,27 @@ digits = []
 for i in range(len(pins_digits)):
   digits.append(gpiozero.LED(pins_digits[i]))
 
-# set digit 0, 1, 2, or 3 to a number
+# Setting up the dot
+dotStatus = None
+dot = gpiozero.LED(constants.SEGMENT_DOT)
+def set_dot(val):
+  '''
+  USAGE: pass in 0, 1, 2, or 3 to indicate which
+  dot on the 7-segment to enable
+  '''
+  global dot
+  if val == None:
+    dot = None
+  if val > 3 or val < 0:
+    dot = None
+    print("Error: display.py / set_dot(" + str(val) + ")")
+    return
+  dot = val
+
 def set_individual(digit, val):
+  '''
+  set digit 0, 1, 2, or 3 to a number
+  '''
   # which LEDs to enable
   leds = num[str(val)]
   # disable all digits
@@ -52,11 +71,18 @@ def set_individual(digit, val):
       segments[j].on()
     else:
       segments[j].off()
+  # enable/disable decimal dot
+  if digit == dotStatus:
+    dot.on()
+  else:
+    dot.off()
   # enable specific digit
   digits[digit].off()
 
-# set the display to a certain set of values, ex: ['1',' ','2','4']
 def set_display(vals):
+  '''
+  set the display to a certain set of values, ex: ['1',' ','2','4']
+  '''
   for i, val in enumerate(vals):
     set_individual(i, val)
     sleep(0.001)
