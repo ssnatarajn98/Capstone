@@ -50,6 +50,7 @@ def set_dot(val):
   global dotStatus
   if val == None:
     dotStatus = None
+    return
   if val > 3 or val < 0:
     dotStatus = None
     print("Error: display.py / set_dot(" + str(val) + ")")

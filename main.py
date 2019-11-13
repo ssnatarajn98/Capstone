@@ -57,7 +57,7 @@ def toggle():
   param_step += 1
 
   # prevent debounce
-  sleep(0.5)
+  sleep(0.2)
 
 def reset_params():
   global params
@@ -74,6 +74,7 @@ def set_params():
     tmp = float(int(read_pot() * 100) / 10.0)
     dotStatus = 2 if (tmp < 10) else None # enable decimal if less than 10
     display.set_dot(dotStatus)
+    tmp = 1.0 if (tmp == 10) else tmp
     display.set_display([
       param_step + 1,
       ' ',
