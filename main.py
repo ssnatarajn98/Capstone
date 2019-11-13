@@ -72,7 +72,8 @@ def set_params():
   print("Please enter parameters on the physical interface.\n")
   while param_step < constants.NUM_PARAMS:
     tmp = float(int(read_pot() * 100) / 10.0)
-    tmp = 9.9 if (tmp == 10) else tmp # dont allow value to be 10 (not enough digits)
+    dotStatus = 2 if (tmp < 10) else None # enable decimal if less than 10
+    display.set_dot(dotStatus)
     display.set_display([
       param_step + 1,
       ' ',
