@@ -47,11 +47,11 @@ def set_dot(val):
   USAGE: pass in 0, 1, 2, or 3 to indicate which
   dot on the 7-segment to enable
   '''
-  global dot
+  global dotStatus
   if val == None:
     dotStatus = None
   if val > 3 or val < 0:
-    dot = None
+    dotStatus = None
     print("Error: display.py / set_dot(" + str(val) + ")")
     return
   dotStatus = val
