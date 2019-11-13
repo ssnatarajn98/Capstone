@@ -49,12 +49,12 @@ def set_dot(val):
   '''
   global dot
   if val == None:
-    dot = None
+    dotStatus = None
   if val > 3 or val < 0:
     dot = None
     print("Error: display.py / set_dot(" + str(val) + ")")
     return
-  dot = val
+  dotStatus = val
 
 def set_individual(digit, val):
   '''
