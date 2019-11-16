@@ -180,7 +180,7 @@ def set_params():
     else:
       # if value is 0.0-10.0
       display.set_dot(2 if tmp < 10 else None)
-      tmp = 1.0 if tmp == 10 else tmp
+      tmp = 1.0 if tmp == 10 else tmp / 10
       display.set_display([
         param_step + 1,
         ' ',
