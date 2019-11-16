@@ -51,6 +51,10 @@ def set_cached_params():
     if i > constants.NUM_PARAMS - 1:
       break
     val = val[:-1] # truncate newline char
+    if '.' in val:
+      val = float(val)
+    else:
+      val = int(val)
     if (val < constants.PARAM_ACCEPTABLE_RANGES[i][0] or
         val > constants.PARAM_ACCEPTABLE_RANGES[i][1]):
       print(str(i) + ": Ignoring erroneous cached parameter " + str(val))
