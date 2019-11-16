@@ -112,13 +112,15 @@ def set_params():
           'inf',
           'inf'
         ])
+        print('inf')
       else:
         display.set_display([
           param_step + 1,
           ' ',
           ' ' if tmp < 10 else int(tmp / 10),
-          int(tmp - int(tmp))
+          int(tmp - (int(tmp / 10) * 10))
         ])
+        print(str(tmp))
     else:
       # if value is 0.0-10.0
       display.set_dot(2 if tmp < 10 else None)
@@ -129,6 +131,7 @@ def set_params():
         ' ' if (int(tmp) == 0) else int(tmp), # if first digit is zero dont show
         int((tmp - int(tmp)) * 10) # ones place
       ])
+      print(tmp)
 
   display.clear()
 
