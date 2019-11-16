@@ -135,9 +135,13 @@ def toggle():
 
   # read from the pot and save the value
   print("Toggled!")
-  reading = take_param_reading_stable()
-  print("Saved value " + constants.PARAM_NAMES[paramStep] + ": " + str(reading))
-  params[paramStep] = reading
+  if initialPotValues[paramStep][1]:
+    reading = take_param_reading_stable()
+    print("Saved value " + constants.PARAM_NAMES[paramStep] + ": " + str(reading))
+    params[paramStep] = reading
+  else:
+    # do nothing, param already has the correct value
+    print("Used previous value for " + constants.PARAM_NAMES[paramStep] + ": " + str(params[paramStep]))
 
   # save next initial pot value for overriding defaults
   initialPotValues.append([read_pot(), False]) # [val, changed?]
