@@ -43,7 +43,7 @@ def set_from_cached_params():
 
   # see if file exists first
   if not path.exists(constants.CACHE_FILENAME):
-    print("Parameter cache file does not exist. Defaulting to zeros.")
+    print("\tParameter cache file does not exist. Defaulting to zeros.")
     return
 
   f = open(constants.CACHE_FILENAME, "r")
@@ -58,11 +58,11 @@ def set_from_cached_params():
       val = int(val)
     if (val < constants.PARAM_ACCEPTABLE_RANGES[i][0] or
         val > constants.PARAM_ACCEPTABLE_RANGES[i][1]):
-      print(str(i) + ": Ignoring erroneous cached parameter " + str(val))
+      print("\t" + str(i) + ": Ignoring erroneous cached parameter " + str(val))
     else:
       # parameter is valid, save it
       params[i] = val
-      print(str(i) + ": " + str(val))
+      print("\t" + str(i) + ": " + str(val))
     i += 1
 
   f.close()
@@ -77,7 +77,7 @@ def set_params_to_cache():
     f.write(str(val) + "\n")
   f.close()
 
-  print("Saved.")
+  print("\tSaved.\n")
 
 def read_pot():
   ''' reads potentiometer value from ADC '''
@@ -124,7 +124,7 @@ def take_param_reading_stable():
       return -1 # means infinity
     return int(reading)
 
-def toggle():
+def toggle_cb():
   ''' saves the parameter value and toggles to the next parameter to be entered '''
   global params
   global paramStep
@@ -134,14 +134,14 @@ def toggle():
     return
 
   # read from the pot and save the value
-  print("Toggled!")
+  print("\tToggled!")
   if initialPotValues[paramStep][1]:
     reading = take_param_reading_stable()
-    print("Saved value " + constants.PARAM_NAMES[paramStep] + ": " + str(reading))
+    print("\tSaved value " + constants.PARAM_NAMES[paramStep] + ": " + str(reading))
     params[paramStep] = reading
   else:
     # do nothing, param already has the correct value
-    print("Used previous value for " + constants.PARAM_NAMES[paramStep] + ": " + str(params[paramStep]))
+    print("\tUsed previous value for " + constants.PARAM_NAMES[paramStep] + ": " + str(params[paramStep]))
 
   # save next initial pot value for overriding defaults
   initialPotValues.append([read_pot(), False]) # [val, changed?]
@@ -162,7 +162,7 @@ def reset_params():
   paramStep = 0
   initialPotValues = []
 
-  print("Parameters reset.")
+  print("\tParameters reset.")
 
 def set_params():
   ''' prompts user to set all parameters on the physical interface '''
@@ -225,7 +225,7 @@ def button_reset_cb():
   set_params()
 
 ''' SIGNAL CALLBACKS '''
-toggleButton.when_pressed = toggle
+toggleButton.when_pressed = toggle_cb
 resetButton.when_held = button_reset_cb
 
 print("Configuration complete.")
