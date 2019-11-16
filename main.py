@@ -118,7 +118,7 @@ def take_param_reading_stable():
     # want a value from 0.0 to 10.0
     return float(int(reading) / 10.0)
   elif constants.PARAM_TYPES[param_step] == 1:
-    if int(reading) > constants.PARAM_ACCEPTABLE_RANGES[1][1]:
+    if int(reading) > constants.PARAM_ACCEPTABLE_RANGES[param_step][1]:
       return -1 # means infinity
     return int(reading)
 
@@ -161,7 +161,7 @@ def set_params():
     if isinstance(tmp, int):
       # if value is 0-100
       display.set_dot(None)
-      if tmp > constants.PARAM_ACCEPTABLE_RANGES[1][1]:
+      if tmp > constants.PARAM_ACCEPTABLE_RANGES[param_step][1]:
         # set to inf
         display.set_display([
           param_step + 1,
