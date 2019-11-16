@@ -60,10 +60,12 @@ def take_param_reading_stable():
   global param_step
   
   # takes a value from 0 to 100
-  reading = ceil(read_pot_stable() * 100)
+  reading = read_pot_stable() * 100
   if constants.PARAM_TYPES == 0:
     # want a value from 0.0 to 10.0
-    reading = float(reading / 10.0)
+    reading = float(int(reading) / 10.0)
+  else:
+    reading = ceil(reading)
   return reading
 
 def toggle():
@@ -113,7 +115,6 @@ def set_params():
           'inf',
           'inf'
         ])
-        #print('inf - int')
       else:
         display.set_display([
           param_step + 1,
@@ -121,7 +122,6 @@ def set_params():
           ' ' if tmp < 10 else int(tmp / 10),
           int(tmp - (int(tmp / 10) * 10))
         ])
-        #print(str(tmp) + ' - int')
     else:
       # if value is 0.0-10.0
       display.set_dot(2 if tmp < 10 else None)
@@ -132,7 +132,6 @@ def set_params():
         ' ' if (int(tmp) == 0) else int(tmp), # if first digit is zero dont show
         int((tmp - int(tmp)) * 10) # ones place
       ])
-      #print(str(tmp) + ' - float')
 
   display.clear()
 
