@@ -27,7 +27,7 @@ params = [0] * constants.NUM_PARAMS # initialize to zero
 param_step = 0
 
 ''' AUXILIARY FUNCTIONS '''
-def read_pot():2
+def read_pot():
   return pot.value
 
 
