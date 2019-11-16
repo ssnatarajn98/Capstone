@@ -47,7 +47,7 @@ def take_param_reading():
   
   # takes a value from 0 to 100
   reading = int(read_pot() * 100)
-  if constants.PARAM_TYPES == 0:
+  if constants.PARAM_TYPES[param_step] == 0:
     # want a value from 0.0 to 10.0
     reading = float(reading / 10.0)
   return reading
@@ -105,13 +105,12 @@ def set_params():
       # if value is 0-100
       display.set_dot(None)
       if tmp == 100:
-        # set to inf TODO
-        tmp = 99
+        # set to inf
         display.set_display([
           param_step + 1,
           ' ',
-          ' ' if tmp < 10 else int(tmp / 10),
-          int(tmp - int(tmp))
+          'inf',
+          'inf'
         ])
       else:
         display.set_display([
