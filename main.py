@@ -139,6 +139,9 @@ def toggle():
   print("Saved value " + constants.PARAM_NAMES[paramStep] + ": " + str(reading))
   params[paramStep] = reading
 
+  # save next initial pot value for overriding defaults
+  initialPotValues.append([read_pot(), False]) # [val, changed?]
+
   # prevent debounce
   sleep(0.2)
 
