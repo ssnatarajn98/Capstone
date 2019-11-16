@@ -10,7 +10,6 @@ print("Hello, world!\n\n")
 # general packages
 from time import sleep
 from signal import pause
-from math import ceil
 import os.path
 from os import path
 # raspberry pi packages
@@ -105,7 +104,7 @@ def take_param_reading():
     # want a value from 0.0 to 10.0
     return float(int(reading) / 10.0)
   elif constants.PARAM_TYPES[param_step] == 1:
-    return ceil(reading)
+    return int(reading)
 
 def take_param_reading_stable():
   ''' take a stable reading from the pot based on the current parameter type
@@ -119,9 +118,9 @@ def take_param_reading_stable():
     # want a value from 0.0 to 10.0
     return float(int(reading) / 10.0)
   elif constants.PARAM_TYPES[param_step] == 1:
-    if ceil(reading) > constants.PARAM_ACCEPTABLE_RANGES[1][1]:
+    if int(reading) > constants.PARAM_ACCEPTABLE_RANGES[1][1]:
       return -1 # means infinity
-    return ceil(reading)
+    return int(reading)
 
 def toggle():
   ''' saves the parameter value and toggles to the next parameter to be entered '''
@@ -181,6 +180,8 @@ def set_params():
       # if value is 0.0-10.0
       display.set_dot(2 if tmp < 10 else None)
       tmp = 1.0 if tmp == 10 else tmp
+      # in case of concurrency issues causing floating point to be disregarded
+      tmp = float(tmp / 10) if tmp > 10 else tmp
       display.set_display([
         param_step + 1,
         ' ',
