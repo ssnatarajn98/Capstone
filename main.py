@@ -10,6 +10,7 @@ print("Hello, world!\n\n")
 # general packages
 from time import sleep
 from signal import pause
+from math import ceil
 # raspberry pi packages
 import gpiozero # uses BCM numbering by default
 # importing local files
@@ -59,7 +60,7 @@ def take_param_reading_stable():
   global param_step
   
   # takes a value from 0 to 100
-  reading = int(read_pot_stable() * 100)
+  reading = ceil(read_pot_stable() * 100)
   if constants.PARAM_TYPES == 0:
     # want a value from 0.0 to 10.0
     reading = float(reading / 10.0)
