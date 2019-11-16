@@ -32,7 +32,7 @@ params = [0] * constants.NUM_PARAMS # initialize to zero
 param_step = 0
 
 ''' AUXILIARY FUNCTIONS '''
-def set_cached_params():
+def set_from_cached_params():
   ''' sets params to previous params saved in cache file
       if file doesn't exist, sets all to zero
   '''
@@ -51,7 +51,7 @@ def set_cached_params():
     if i > constants.NUM_PARAMS - 1:
       break
     val = val[:-1] # truncate newline char
-    if '.' in val:
+    if '.' in val: # check if float or int
       val = float(val)
     else:
       val = int(val)
@@ -65,6 +65,18 @@ def set_cached_params():
     i += 1
 
   f.close()
+
+def set_params_to_cache():
+  global params
+
+  print("Saving parameters to cache...")
+
+  f = open(constants.CACHE_FILENAME, "w") # will create if nonexistant
+  for val in params:
+    f.write(val + str("\n"))
+  f.close()
+
+  print("Saved.")
 
 def read_pot():
   ''' reads potentiometer value from ADC '''
@@ -182,6 +194,7 @@ def button_reset_cb():
   ''' callback function to allow user to set parameters again '''
   print("\nDevice reset triggered!\n")
   reset_params()
+  set_from_cached_params()
   set_params()
 
 ''' SIGNAL CALLBACKS '''
@@ -191,7 +204,7 @@ resetButton.when_held = button_reset_cb
 print("Configuration complete.")
 
 ''' BEGIN SCRIPT '''
-set_cached_params()
+set_from_cached_params()
 set_params()
 
 pause() # wait indefinitely
