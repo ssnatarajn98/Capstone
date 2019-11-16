@@ -45,13 +45,17 @@ def take_param_reading():
       (to be used to update the 7 segment display)
   '''
   global param_step
+
+  if param_step > constants.NUM_PARAMS:
+    return 0
   
   # takes a value from 0 to 100
-  reading = int(read_pot() * 100)
+  reading = read_pot() * 100
   if constants.PARAM_TYPES[param_step] == 0:
     # want a value from 0.0 to 10.0
-    reading = float(reading / 10.0)
-  return reading
+    return float(int(reading) / 10.0)
+  else:
+    return ceil(reading)
 
 def take_param_reading_stable():
   ''' take a stable reading from the pot based on the current parameter type
@@ -63,10 +67,9 @@ def take_param_reading_stable():
   reading = read_pot_stable() * 100
   if constants.PARAM_TYPES[param_step] == 0:
     # want a value from 0.0 to 10.0
-    reading = float(int(reading) / 10.0)
+    return float(int(reading) / 10.0)
   else:
-    reading = ceil(reading)
-  return reading
+    return ceil(reading)
 
 def toggle():
   ''' saves the parameter value and toggles to the next parameter to be entered '''
