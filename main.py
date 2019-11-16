@@ -138,11 +138,11 @@ def toggle():
   print("Saved value " + constants.PARAM_NAMES[param_step] + ": " + str(reading))
   params[param_step] = reading
 
-  # ready to read the next parameter
-  param_step += 1
-
   # prevent debounce
   sleep(0.2)
+
+  # ready to read the next parameter
+  param_step += 1
 
 def reset_params():
   ''' resets all parameters to zero '''
