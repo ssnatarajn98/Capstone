@@ -156,6 +156,7 @@ def reset_params():
   ''' resets all parameters to zero '''
   global params
   global paramStep
+  global initialPotValues
 
   params = [0] * constants.NUM_PARAMS
   paramStep = 0
