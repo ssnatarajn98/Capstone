@@ -47,3 +47,6 @@ PARAM_ACCEPTABLE_RANGES = [
 ]
 ''' FILES '''
 CACHE_FILENAME = "cached_parameters.txt"
+# amount pot can move before program decides that the user
+# is trying to override the default value
+POT_MOVEMENT_TOLERANCE = 0.05

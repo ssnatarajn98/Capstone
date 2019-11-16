@@ -2,6 +2,8 @@ from time import sleep
 import constants
 import gpiozero
 
+print("Configuring display...")
+
 ''' SEGMENT CONSTANTS '''
 pins_segments =  [
   constants.SEGMENT_A,
