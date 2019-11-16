@@ -61,7 +61,7 @@ def take_param_reading_stable():
   
   # takes a value from 0 to 100
   reading = read_pot_stable() * 100
-  if constants.PARAM_TYPES == 0:
+  if constants.PARAM_TYPES[param_step] == 0:
     # want a value from 0.0 to 10.0
     reading = float(int(reading) / 10.0)
   else:
@@ -132,7 +132,6 @@ def set_params():
         ' ' if (int(tmp) == 0) else int(tmp), # if first digit is zero dont show
         int((tmp - int(tmp)) * 10) # ones place
       ])
-    print(display.get_dotStatus())
 
   display.clear()
 
