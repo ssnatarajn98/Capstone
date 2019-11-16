@@ -190,6 +190,7 @@ def set_params():
       ])
 
   display.clear()
+  set_params_to_cache()
 
 def button_reset_cb():
   ''' callback function to allow user to set parameters again '''
