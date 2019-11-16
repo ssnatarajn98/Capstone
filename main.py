@@ -72,7 +72,7 @@ def set_params_to_cache():
 
   f = open(constants.CACHE_FILENAME, "w") # will create if nonexistant
   for val in params:
-    f.write(val + str("\n"))
+    f.write(str(val) + "\n")
   f.close()
 
   print("Saved.")
