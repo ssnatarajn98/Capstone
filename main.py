@@ -131,7 +131,7 @@ def set_params():
         ' ' if (int(tmp) == 0) else int(tmp), # if first digit is zero dont show
         int((tmp - int(tmp)) * 10) # ones place
       ])
-      print(tmp + ' - float')
+      print(str(tmp) + ' - float')
 
   display.clear()
 
