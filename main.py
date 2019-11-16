@@ -161,7 +161,7 @@ def set_params():
   global initialPotValues
   print("Please enter parameters on the physical interface.\n")
   # set initial pot value for first param
-  initialPotValues.append([read_pot, False]) # [val, changed?]
+  initialPotValues.append([read_pot(), False]) # [val, changed?]
   while paramStep < constants.NUM_PARAMS:
     if not initialPotValues[paramStep][1]:
       if abs(read_pot() - initialPotValues[paramStep][0]) < constants.POT_MOVEMENT_TOLERANCE:
