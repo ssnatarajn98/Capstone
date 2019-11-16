@@ -28,19 +28,45 @@ param_step = 0
 
 ''' AUXILIARY FUNCTIONS '''
 def read_pot():
+  ''' reads potentiometer value from ADC '''
   return pot.value
 
-
-# average a few values from the pot
-# in case of an anomaly/error
 def read_pot_stable():
+  ''' average a few values from the pot in case of an anomaly/error '''
   reading = 0
   for i in range(10):
     reading += pot.value
     sleep(0.1)
   return reading / 10
 
+def take_param_reading():
+  ''' take a reading from the pot based on the current parameter type
+      (to be used to update the 7 segment display)
+  '''
+  global param_step
+  
+  # takes a value from 0 to 100
+  reading = int(read_pot() * 100)
+  if constants.PARAM_TYPES == 0:
+    # want a value from 0.0 to 10.0
+    reading = float(reading / 10.0)
+  return reading
+
+def take_param_reading_stable():
+  ''' take a stable reading from the pot based on the current parameter type
+      (to be used to save the value to memory)
+  '''
+  global param_step
+  
+  # takes a value from 0 to 100
+  reading = int(read_pot_stable() * 100)
+  if constants.PARAM_TYPES == 0:
+    # want a value from 0.0 to 10.0
+    reading = float(reading / 10.0)
+  return reading
+
 def toggle():
+  ''' saves the parameter value and toggles to the next parameter to be entered '''
   global params
   global param_step
 
@@ -50,7 +76,7 @@ def toggle():
 
   # read from the pot and save the value
   print("Toggled!")
-  reading = float(int(read_pot_stable() * 100) / 10.0)
+  reading = take_param_reading_stable()
   print("Saved value " + constants.PARAM_NAMES[param_step] + ": " + str(reading))
   params[param_step] = reading
 
@@ -61,6 +87,7 @@ def toggle():
   sleep(0.2)
 
 def reset_params():
+  ''' resets all parameters to zero '''
   global params
   global param_step
 
@@ -70,31 +97,54 @@ def reset_params():
   print("Parameters reset.")
 
 def set_params():
+  ''' prompts user to set all parameters on the physical interface '''
   print("Please enter parameters on the physical interface.\n")
   while param_step < constants.NUM_PARAMS:
-    tmp = float(int(read_pot() * 100) / 10.0)
-    dotStatus = 2 if (tmp < 10) else None # enable decimal if less than 10
-    display.set_dot(dotStatus)
-    tmp = 1.0 if (tmp == 10) else tmp
-    display.set_display([
-      param_step + 1,
-      ' ',
-      ' ' if (int(tmp) == 0) else int(tmp), # if first digit is zero dont show
-      int((tmp - int(tmp)) * 10) # ones place
+    tmp = take_param_reading()
+    if isinstance(tmp, int):
+      # if value is 0-100
+      display.set_dot(None)
+      if tmp == 100:
+        # set to inf TODO
+        tmp = 99
+        display.set_display([
+          param_step + 1,
+          ' ',
+          ' ' if tmp < 10 else int(tmp / 10),
+          int(tmp - int(tmp))
+        ])
+      else:
+        display.set_display([
+          param_step + 1,
+          ' ',
+          ' ' if tmp < 10 else int(tmp / 10),
+          int(tmp - int(tmp))
+        ])
+    else:
+      # if value is 0.0-10.0
+      display.set_dot(2 if tmp < 10 else None)
+      tmp = 1.0 if tmp == 10 else tmp
+      display.set_display([
+        param_step + 1,
+        ' ',
+        ' ' if (int(tmp) == 0) else int(tmp), # if first digit is zero dont show
+        int((tmp - int(tmp)) * 10) # ones place
       ])
+
   display.clear()
 
-def button_reset():
+def button_reset_cb():
+  ''' callback function to allow user to set parameters again '''
   print("\nDevice reset triggered!\n")
   reset_params()
   set_params()
 
 ''' SIGNAL CALLBACKS '''
 toggleButton.when_pressed = toggle
-resetButton.when_held = button_reset
+resetButton.when_held = button_reset_cb
 
 ''' BEGIN SCRIPT '''
 
 set_params()
 
-pause()
+pause() # wait indefinitely

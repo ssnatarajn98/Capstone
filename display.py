@@ -38,10 +38,37 @@ for i in range(len(pins_segments)):
 digits = []
 for i in range(len(pins_digits)):
   digits.append(gpiozero.LED(pins_digits[i]))
-
-# Setting up the dot
 dotStatus = None
 dot = gpiozero.LED(constants.SEGMENT_DOT)
+
+# Setting up enable/disable functions
+segments_enable = []
+segments_disable = []
+digits_enable = []
+digits_disable = []
+dot_enable = None
+dot_disable = None
+if constants.SEGMENT_TYPE == "COMMON CATHODE":
+  for seg in segments:
+    segments_enable.append(seg.on)
+    segments_disable.append(seg.off)
+  for dig in digits:
+    digits_enable.append(dig.off)
+    digits_disable.append(dig.on)
+  dot_enable = dot.on
+  dot_disable = dot.off
+elif constants.SEGMENT_TYPE == "COMMON ANODE":
+  for seg in segments:
+    segments_enable.append(seg.off)
+    segments_disable.append(seg.on)
+  for dig in digits:
+    digits_enable.append(dig.on)
+    digits_disable.append(dig.off)
+  dot_enable = dot.off
+  dot_disable = dot.on
+else:
+  print("display.py / Unknown SEGMENT_TYPE.")
+
 def set_dot(val):
   '''
   USAGE: pass in 0, 1, 2, or 3 to indicate which
@@ -65,20 +92,20 @@ def set_individual(digit, val):
   leds = num[str(val)]
   # disable all digits
   for d in range(len(digits)):
-    digits[d].on()
+    digits_disable[d]()
   # enable/disable corresponding segments
   for j in range(len(segments)):
     if leds[j]:
-      segments[j].on()
+      segments_enable[j]()
     else:
-      segments[j].off()
+      segments_disable[j]()
   # enable/disable decimal dot
   if digit == dotStatus:
-    dot.on()
+    dot_enable()
   else:
-    dot.off()
+    dot_disable()
   # enable specific digit
-  digits[digit].off()
+  digits_enable[digit]()
 
 def set_display(vals):
   '''
