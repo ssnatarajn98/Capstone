@@ -87,6 +87,9 @@ def set_dot(val):
     return
   dotStatus = val
 
+def get_dotStatus():
+  return dotStatus
+
 def set_individual(digit, val):
   '''
   set digit 0, 1, 2, or 3 to a number
