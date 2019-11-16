@@ -11,11 +11,15 @@ print("Hello, world!\n\n")
 from time import sleep
 from signal import pause
 from math import ceil
+import os.path
+from os import path
 # raspberry pi packages
 import gpiozero # uses BCM numbering by default
 # importing local files
 import constants
 import display
+
+print("Configuring...")
 
 ''' GLOBAL VARIABLES '''
 # buttons
@@ -28,6 +32,35 @@ params = [0] * constants.NUM_PARAMS # initialize to zero
 param_step = 0
 
 ''' AUXILIARY FUNCTIONS '''
+def set_cached_params():
+  ''' sets params to previous params saved in cache file
+      if file doesn't exist, sets all to zero
+  '''
+  global params
+
+  print("Pulling cached parameters...")
+
+  # see if file exists first
+  if not path.exists(constants.CACHE_FILENAME):
+    print("Parameter cache file does not exist. Defaulting to zeros.")
+    return
+
+  f = open(constants.CACHE_FILENAME, "r")
+  i = 0
+  for val in f:
+    if i > constants.NUM_PARAMS - 1:
+      break
+    if (val < constants.PARAM_ACCEPTABLE_RANGES[i][0] or
+        val > constants.PARAM_ACCEPTABLE_RANGES[i][1]):
+      print(str(i) + ": Ignoring erroneous cached parameter " + str(val))
+    else:
+      # parameter is valid, save it
+      params[i] = val
+      print(str(i) + ": " + str(val))
+    i += 1
+
+  f.close()
+
 def read_pot():
   ''' reads potentiometer value from ADC '''
   return pot.value
@@ -54,7 +87,7 @@ def take_param_reading():
   if constants.PARAM_TYPES[param_step] == 0:
     # want a value from 0.0 to 10.0
     return float(int(reading) / 10.0)
-  else:
+  elif constants.PARAM_TYPES[param_step] == 1:
     return ceil(reading)
 
 def take_param_reading_stable():
@@ -68,7 +101,9 @@ def take_param_reading_stable():
   if constants.PARAM_TYPES[param_step] == 0:
     # want a value from 0.0 to 10.0
     return float(int(reading) / 10.0)
-  else:
+  elif constants.PARAM_TYPES[param_step] == 1:
+    if ceil(reading) > constants.PARAM_ACCEPTABLE_RANGES[1][1]:
+      return -1 # means infinity
     return ceil(reading)
 
 def toggle():
@@ -110,7 +145,7 @@ def set_params():
     if isinstance(tmp, int):
       # if value is 0-100
       display.set_dot(None)
-      if tmp == 100:
+      if tmp > constants.PARAM_ACCEPTABLE_RANGES[1][1]:
         # set to inf
         display.set_display([
           param_step + 1,
@@ -148,8 +183,9 @@ def button_reset_cb():
 toggleButton.when_pressed = toggle
 resetButton.when_held = button_reset_cb
 
-''' BEGIN SCRIPT '''
+print("Configuration complete.")
 
+''' BEGIN SCRIPT '''
 set_params()
 
 pause() # wait indefinitely

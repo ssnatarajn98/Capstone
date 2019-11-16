@@ -40,3 +40,10 @@ PARAM_TYPES = [
   0,
   1
 ]
+PARAM_ACCEPTABLE_RANGES = {
+  0: [0,10],
+  1: [-1,90]
+}
+
+''' FILES '''
+CACHE_FILENAME = "cached_parameters.txt"
