@@ -36,7 +36,7 @@ def read_pot_stable():
   reading = 0
   for i in range(10):
     reading += pot.value
-    sleep(0.001)
+    sleep(0.1)
   return reading / 10
 
 def toggle():
