@@ -180,12 +180,12 @@ def set_params():
     else:
       # if value is 0.0-10.0
       display.set_dot(2 if tmp < 10 else None)
-      tmp = 1.0 if tmp == 10 else tmp / 10
+      tmp = 1.0 if tmp == 10 else tmp
       display.set_display([
         param_step + 1,
         ' ',
         ' ' if (int(tmp) == 0) else int(tmp), # if first digit is zero dont show
-        int((tmp - int(tmp)) * 10) # ones place
+        int((tmp - int(tmp))) # ones place
       ])
 
   display.clear()
