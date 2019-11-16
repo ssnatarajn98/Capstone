@@ -28,7 +28,9 @@ param_step = 0
 
 ''' AUXILIARY FUNCTIONS '''
 def read_pot():
+  print(pot.value)
   return pot.value
+
 
 # average a few values from the pot
 # in case of an anomaly/error
@@ -37,7 +39,6 @@ def read_pot_stable():
   for i in range(10):
     reading += pot.value
     sleep(0.1)
-    print(reading/10)
   return reading / 10
 
 def toggle():
