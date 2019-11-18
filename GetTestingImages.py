@@ -144,7 +144,7 @@ def reset_params():
 
   print("\tParameters reset.")
 def takePictures(height, width):
-    print("\t"+type(height))
+    print(type(height))
     #normHeight = adjustedValued(height)
     #normWidth = adjustedValue(width)
     '''camera = PiCamera()
