@@ -71,9 +71,7 @@ def toggle_cb():
   # ignore button presses after all parameters have been set
   if paramStep >= constants.TEST_PARAMS:
     print("\there")
-    print(params[1])
-    print(params[2])
-    #takePictures()
+    takePictures(params[0],params[1])
     return
 
   # read from the pot and save the value
@@ -124,9 +122,7 @@ def setupWidthFolder(height, width):
     if not os.path.exists(currDir):
         os.makedirs(currDir)
 
-def setupCamera():
-    camera = PiCamera()
-    camera.start_preview()
+
 
 def setupFolder():
     for i in range(30, 120, 5):
@@ -147,7 +143,19 @@ def reset_params():
   initialPotValues = []
 
   print("\tParameters reset.")
-
+def takePictures(height, width):
+    print("\t"+type(height))
+    #normHeight = adjustedValued(height)
+    #normWidth = adjustedValue(width)
+    '''camera = PiCamera()
+    camera.start_preview()
+    cnt =  0
+    while(5):
+        cnt = cnt + 1
+        sleep(.2)
+        camera.capture('/home/pi/Desktop/ImageTestFolder/imageTest%s.jpg' % cnt)
+        print("printed %s photos" % cnt)
+    camera.stop_preview()'''
 def set_params():
   ''' prompts user to set all parameters on the physical interface '''
   global initialPotValues
