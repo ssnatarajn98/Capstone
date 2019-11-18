@@ -34,6 +34,10 @@ PARAM_NAMES = [
   "Lateral distance",
   "Time delay"
 ]
+FLIGHT_TEST_NAMES = [
+  "Height",
+  "Width"
+]
 # 0: 0.0-10 or 1: 0 to 99
 PARAM_TYPES = [
   0,

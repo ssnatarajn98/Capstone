@@ -76,11 +76,11 @@ def toggle_cb():
   print("\tToggled!")
   if initialPotValues[paramStep][1]:
     reading = take_param_reading_stable()
-    print("\tSaved value " + constants.PARAM_NAMES[paramStep] + ": " + str(reading))
+    print("\tSaved value " + constants.FLIGHT_TEST_NAMES[paramStep] + ": " + str(reading))
     params[paramStep] = reading
   else:
     # do nothing, param already has the correct value
-    print("\tUsed previous value for " + constants.PARAM_NAMES[paramStep] + ": " + str(params[paramStep]))
+    print("\tUsed previous value for " + constants.FLIGHT_TEST_NAMES[paramStep] + ": " + str(params[paramStep]))
 
   # save next initial pot value for overriding defaults
   initialPotValues.append([read_pot(), False]) # [val, changed?]
@@ -202,7 +202,7 @@ def button_reset_cb():
   reset_params()
   set_from_cached_params()
   set_params()
-  
+
 toggleButton.when_pressed = toggle_cb
 resetButton.when_held = button_reset_cb
 
