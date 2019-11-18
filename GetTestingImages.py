@@ -51,10 +51,10 @@ def setupCamera():
     camera.start_preview()
 
 def setupFolder():
-    for i in range(3, 12, .5):
+    for i in range(30, 120, 5):
         print(i)
         setupHeightFolder(i)
-        for j in range(3,12,.5):
+        for j in range(30,120,5):
             print(j)
             setupWidthFolder(i,j)
 setupFolder()
