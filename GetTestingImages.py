@@ -70,6 +70,7 @@ def toggle_cb():
 
   # ignore button presses after all parameters have been set
   if paramStep >= constants.TEST_PARAMS:
+    print("here")
     return
 
   # read from the pot and save the value
