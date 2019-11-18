@@ -36,14 +36,14 @@ def allTestPictures():
 
 def setupHeightFolder(height):
     allTestPictures()
-    currDir = "/home/pi/Desktop/ImageTestFolder/height-" + str(height)+"/"
+    currDir = "/home/pi/Desktop/OutdoorTestImages/height-" + str(height)+"/"
     print(currDir)
     if not os.path.exists(currDir):
         os.makedirs(currDir)
 
 def setupWidthFolder(height, width):
     setupHeightFolder(height)
-    currDir = "/home/pi/Desktop/ImageTestFolder/height-" + str(height)+"/"+"width-"+str(width)+"/"
+    currDir = "/home/pi/Desktop/OutdoorTestImages/height-" + str(height)+"/"+"width-"+str(width)+"/"
     if not os.path.exists(currDir):
         os.makedirs(currDir)
 
