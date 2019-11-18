@@ -24,7 +24,4 @@ y = min_row_val - (x * width)
 
 print("X Coordinate is: %s" %x)
 print("Y Coordinate is: %s" %y)
-    
 
-
-        
