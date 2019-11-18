@@ -37,6 +37,7 @@ def allTestPictures():
 def setupHeightFolder(height):
     allTestPictures()
     currDir = "/home/pi/Desktop/ImageTestFolder/height-" + str(height)+"/"
+    print(currDir)
     if not os.path.exists(currDir):
         os.makedirs(currDir)
 
@@ -52,10 +53,10 @@ def setupCamera():
 
 def setupFolder():
     for i in range(30, 120, 5):
-        print(i)
+        #print(i)
         setupHeightFolder(i)
         for j in range(30,120,5):
-            print(j)
+            #print(j)
             setupWidthFolder(i,j)
 setupFolder()
 
