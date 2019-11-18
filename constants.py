@@ -29,6 +29,7 @@ SEGMENT_DOT = 18
 
 ''' PARAMETER SELECTION '''
 NUM_PARAMS = 3
+TEST_PARAMS = 2
 PARAM_NAMES = [
   "Flight altitude",
   "Lateral distance",
