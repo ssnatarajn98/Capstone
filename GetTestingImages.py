@@ -2,6 +2,8 @@ import os
 from picamera import PiCamera
 from time import sleep
 import gpiozero
+import constants
+import display
 
 print("Configuring Pi...")
 
