@@ -159,7 +159,7 @@ def adjustedValue(val):
     return newVal
 
 def takePictures(height, width):
-    global resetButtonVal
+    #global resetButtonVal
     resetButtonVal = True
     print(type(height))
     normHeight = adjustedValue(height)
@@ -167,10 +167,10 @@ def takePictures(height, width):
     camera = PiCamera()
     camera.start_preview()
     cnt =  0
-    while(resetButtonVal):
+    while(cnt<6):
         cnt = cnt + 1
         sleep(.2)
-        currImage = "/home/pi/Desktop/OutdoorTestImages/height-" + str(normHeight)+"/"+"width-"+str(normWidth)+"/"+str(cnt)+".jpg"
+        currImage = "/home/pi/Desktop/OutdoorTestImages/height-" + str(normHeight)+"/"+"width-"+str(normWidth)+"/low-"+str(cnt)+".jpg"
         print(currImage)
         camera.capture(currImage)
     camera.stop_preview()
