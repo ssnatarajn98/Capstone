@@ -143,19 +143,34 @@ def reset_params():
   initialPotValues = []
 
   print("\tParameters reset.")
+def adjustedValue(val):
+    val = val * 10
+    intVal = int(val)
+    valRange = intVal % 10
+    newVal = 0
+    if(valRange<=2):
+        newVal = intVal - valRange
+    elif(valRange>2 and valRange <=7):
+        newVal = intVal - valRange + 5
+    else:
+        newVal = intVal - valRange + 10
+    print(newVal)
+    return newVal
+
 def takePictures(height, width):
     print(type(height))
-    #normHeight = adjustedValued(height)
-    #normWidth = adjustedValue(width)
-    '''camera = PiCamera()
+    normHeight = adjustedValue(height)
+    normWidth = adjustedValue(width)
+    camera = PiCamera()
     camera.start_preview()
     cnt =  0
     while(5):
         cnt = cnt + 1
         sleep(.2)
-        camera.capture('/home/pi/Desktop/ImageTestFolder/imageTest%s.jpg' % cnt)
+        currImage = "/home/pi/Desktop/OutdoorTestImages/height-" + str(height)+"/"+"width-"+str(width)+"/"+str(cnt)
+        camera.capture(currImage)
         print("printed %s photos" % cnt)
-    camera.stop_preview()'''
+    camera.stop_preview()
 def set_params():
   ''' prompts user to set all parameters on the physical interface '''
   global initialPotValues
