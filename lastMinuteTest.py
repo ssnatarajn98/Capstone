@@ -29,10 +29,10 @@ def setupWidthFolder(height, width):
         os.makedirs(currDir)
 
 def setupFolder():
-    for i in range(30, 120, 5):
+    for i in range(10, 120, 5):
         #print(i)
         setupHeightFolder(i)
-        for j in range(30,120,5):
+        for j in range(10,120,5):
             #print(j)
             setupWidthFolder(i,j)
 
