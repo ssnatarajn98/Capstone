@@ -170,7 +170,6 @@ def takePictures(height, width):
         currImage = "/home/pi/Desktop/OutdoorTestImages/height-" + str(normHeight)+"/"+"width-"+str(normWidth)+"/"+str(cnt)
         print(currImage)
         camera.capture(currImage)
-        print("printed %s photos" % cnt)
     camera.stop_preview()
 def set_params():
   ''' prompts user to set all parameters on the physical interface '''
