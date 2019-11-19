@@ -97,6 +97,9 @@ def set_individual(digit, val):
   '''
   set digit 0, 1, 2, or 3 to a number
   '''
+  if val == ' ':
+    # skip to save time
+    return
   # which LEDs to enable
   leds = num[str(val)]
   # disable all digits
@@ -122,7 +125,7 @@ def set_display(vals):
   '''
   for i, val in enumerate(vals):
     set_individual(i, val)
-    sleep(0.001)
+    #sleep(0.001)
 
 def clear():
   set_display([' '] * 4)
