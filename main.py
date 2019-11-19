@@ -171,7 +171,7 @@ def set_params():
   # set initial pot value for first param
   initialPotValues.append([read_pot(), False]) # [val, changed?]
   while paramStep < constants.NUM_PARAMS:
-    print(read_pot())
+    #print(read_pot())
     if not initialPotValues[paramStep][1]:
       if abs(read_pot() - initialPotValues[paramStep][0]) < constants.POT_MOVEMENT_TOLERANCE:
         # significant movement has not been detected
