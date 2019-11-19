@@ -52,7 +52,7 @@ def takePictures(height, width):
     camera.start_preview()
     print(normHeight)
     print(type(normHeight))
-    #camera.resolution = (2592, 1944)
+    camera.resolution = (2592, 1944)
     cnt = 0
     while(cnt<6):
         cnt = cnt + 1
@@ -62,7 +62,7 @@ def takePictures(height, width):
     camera.stop_preview()
     print("\t finished high quality")
 
-    #camera.resolution = (1280, 960)
+    camera.resolution = (1280, 960)
     camera.start_preview()
     cnt = 0
     while(cnt<5):
@@ -74,7 +74,7 @@ def takePictures(height, width):
     camera.stop_preview()
     print("\t finished medium quality")
 
-    #camera.resolution = (640, 480)
+    camera.resolution = (640, 480)
     camera.start_preview()
     cnt = 0
     while(cnt<6):
@@ -84,7 +84,7 @@ def takePictures(height, width):
         print(currImage)
         camera.capture(currImage)
     camera.stop_preview()
-    print("\t finished medium quality")
+    print("\t finished low quality")
 
 def mainFunction():
     setupFolder()
