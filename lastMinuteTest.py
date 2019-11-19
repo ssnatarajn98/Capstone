@@ -5,6 +5,15 @@ import gpiozero
 import constants
 import display
 
+lowCamera = PiCamera()
+lowCamera.resolution =  (640, 480)
+mediumCamera = PiCamera()
+mediumCamera.resolution = (1280, 960)
+highCamera = PiCamera()
+highCamera.resolution = (2592, 1944)
+
+
+
 def allTestPictures():
     if not os.path.exists('/home/pi/Desktop/OutdoorTestImages/'):
         os.makedirs('/home/pi/Desktop/OutdoorTestImages/')
@@ -44,41 +53,40 @@ def adjustedValue(val):
     return newVal
 
 def takePictures(height, width):
-    #global resetButtonVal
+    global lowCamera
+    global mediumCamera
+    global highCamera
+    glob
     resetButtonVal = True
     normHeight = adjustedValue(height)
     normWidth = adjustedValue(width)
-    camera = PiCamera()
-    camera.start_preview()
-    print(normHeight)
-    print(type(normHeight))
-    camera.resolution = (2592, 1944)
+    highCamera.start_preview()
     cnt = 0
-    while(cnt<4):
+    while(cnt<3):
         cnt = cnt + 1
         currImage = "/home/pi/Desktop/OutdoorTestImages/height-" + str(normHeight)+"/"+"width-"+str(normWidth)+"/high-"+str(cnt)+".jpg"
-        camera.capture(currImage)
-    camera.stop_preview()
+        highCamera.capture(currImage)
+    highCamera.stop_preview()
     print("\t finished high quality")
 
-    camera.resolution = (1280, 960)
-    camera.start_preview()
+
+    mediumCamera.start_preview()
     cnt = 0
-    while(cnt<4):
+    while(cnt<3):
         cnt = cnt + 1
         currImage = "/home/pi/Desktop/OutdoorTestImages/height-" + str(normHeight)+"/"+"width-"+str(normWidth)+"/medium-"+str(cnt)+".jpg"
-        camera.capture(currImage)
-    camera.stop_preview()
+        mediumCamera.capture(currImage)
+    mediumCamera.stop_preview()
     print("\t finished medium quality")
 
-    camera.resolution = (640, 480)
-    camera.start_preview()
+
+    lowCamera.start_preview()
     cnt = 0
-    while(cnt<4):
+    while(cnt<3):
         cnt = cnt + 1
         currImage = "/home/pi/Desktop/OutdoorTestImages/height-" + str(normHeight)+"/"+"width-"+str(normWidth)+"/low-"+str(cnt)+".jpg"
-        camera.capture(currImage)
-    camera.stop_preview()
+        lowCamera.capture(currImage)
+    lowCamera.stop_preview()
     print("\t finished low quality")
 
 def mainFunction():
