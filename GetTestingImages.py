@@ -17,6 +17,7 @@ initialPotValues = []
 # parameter selection
 params = [0] * constants.NUM_PARAMS # initialize to zero
 paramStep = 0
+resetButtonVal = True
 
 def read_pot():
   ''' reads potentiometer value from ADC '''
@@ -158,13 +159,15 @@ def adjustedValue(val):
     return newVal
 
 def takePictures(height, width):
+    global resetButtonVal
+    resetButtonVal = True
     print(type(height))
     normHeight = adjustedValue(height)
     normWidth = adjustedValue(width)
     camera = PiCamera()
     camera.start_preview()
     cnt =  0
-    while(5):
+    while(resetButtonVal):
         cnt = cnt + 1
         sleep(.2)
         currImage = "/home/pi/Desktop/OutdoorTestImages/height-" + str(normHeight)+"/"+"width-"+str(normWidth)+"/"+str(cnt)+".jpg"
@@ -226,6 +229,8 @@ def set_params():
 def button_reset_cb():
   ''' callback function to allow user to set parameters again '''
   print("\nDevice reset triggered!\n")
+  global resetButtonVal
+  resetButtonVal = False
   reset_params()
   #set_from_cached_params()
   set_params()
