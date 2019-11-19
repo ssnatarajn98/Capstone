@@ -7,7 +7,8 @@ import display
 
 lowCamera = PiCamera()
 lowCamera.resolution =  (640, 480)
-
+#lowCamera.resolution = (2592,1944)
+#lowCamera.resolution = (1280,960)
 
 
 
@@ -60,16 +61,14 @@ def takePictures(height, width):
         currImage = "/home/pi/Desktop/OutdoorTestImages/height-" + str(normHeight)+"/"+"width-"+str(normWidth)+"/low-"+str(cnt)+".jpg"
         lowCamera.capture(currImage)
     lowCamera.stop_preview()
-    print("\t finished low quality")
+    print("\t finished photo")
 
 def mainFunction():
     setupFolder()
     while(1):
-        print("\t top")
         height = input("\t height: ")
         width = input("\t  width: ")
         takePictures(height,width)
-    print("\t exited main program")
 
 mainFunction()
 
