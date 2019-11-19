@@ -88,9 +88,6 @@ def mainFunction():
         height = input("\t height: ")
         width = input("\t  width: ")
         takePictures(height,width)
-        ex = input("\t exit")
-        if(ex=="1"):
-            return
     print("\t exited main program")
 
 mainFunction()
