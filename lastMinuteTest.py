@@ -54,9 +54,8 @@ def takePictures(height, width):
     print(type(normHeight))
     camera.resolution = (2592, 1944)
     cnt = 0
-    while(cnt<6):
+    while(cnt<4):
         cnt = cnt + 1
-        sleep(.2)
         currImage = "/home/pi/Desktop/OutdoorTestImages/height-" + str(normHeight)+"/"+"width-"+str(normWidth)+"/high-"+str(cnt)+".jpg"
         camera.capture(currImage)
     camera.stop_preview()
@@ -65,11 +64,9 @@ def takePictures(height, width):
     camera.resolution = (1280, 960)
     camera.start_preview()
     cnt = 0
-    while(cnt<5):
+    while(cnt<4):
         cnt = cnt + 1
-        sleep(.2)
         currImage = "/home/pi/Desktop/OutdoorTestImages/height-" + str(normHeight)+"/"+"width-"+str(normWidth)+"/medium-"+str(cnt)+".jpg"
-        print(currImage)
         camera.capture(currImage)
     camera.stop_preview()
     print("\t finished medium quality")
@@ -77,11 +74,9 @@ def takePictures(height, width):
     camera.resolution = (640, 480)
     camera.start_preview()
     cnt = 0
-    while(cnt<6):
+    while(cnt<4):
         cnt = cnt + 1
-        sleep(.2)
         currImage = "/home/pi/Desktop/OutdoorTestImages/height-" + str(normHeight)+"/"+"width-"+str(normWidth)+"/low-"+str(cnt)+".jpg"
-        print(currImage)
         camera.capture(currImage)
     camera.stop_preview()
     print("\t finished low quality")
