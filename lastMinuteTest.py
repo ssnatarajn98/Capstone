@@ -50,6 +50,8 @@ def takePictures(height, width):
     normWidth = adjustedValue(width)
     camera = PiCamera()
     camera.start_preview()
+    print(normHeight)
+    print(type(normHeight))
     #camera.resolution = (2592, 1944)
     cnt = 0
     while(cnt<6):
@@ -97,5 +99,5 @@ def mainFunction():
     print("\t exited main program")
 
 mainFunction()
-    
+
 
