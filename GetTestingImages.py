@@ -113,7 +113,6 @@ def allTestPictures():
 def setupHeightFolder(height):
     allTestPictures()
     currDir = "/home/pi/Desktop/OutdoorTestImages/height-" + str(height)+"/"
-    print(currDir)
     if not os.path.exists(currDir):
         os.makedirs(currDir)
 
@@ -161,12 +160,35 @@ def adjustedValue(val):
 def takePictures(height, width):
     #global resetButtonVal
     resetButtonVal = True
-    print(type(height))
     normHeight = adjustedValue(height)
     normWidth = adjustedValue(width)
     camera = PiCamera()
     camera.start_preview()
-    cnt =  0
+    #camera.resolution = (2592, 1944)
+    cnt = 0
+    while(cnt<6):
+        cnt = cnt + 1
+        sleep(.2)
+        currImage = "/home/pi/Desktop/OutdoorTestImages/height-" + str(normHeight)+"/"+"width-"+str(normWidth)+"/high-"+str(cnt)+".jpg"
+        camera.capture(currImage)
+    camera.stop_preview()
+    print("\t finished high quality")
+
+    #camera.resolution = (1280, 960)
+    camera.start_preview()
+    cnt = 0
+    while(cnt<5):
+        cnt = cnt + 1
+        sleep(.2)
+        currImage = "/home/pi/Desktop/OutdoorTestImages/height-" + str(normHeight)+"/"+"width-"+str(normWidth)+"/medium-"+str(cnt)+".jpg"
+        print(currImage)
+        camera.capture(currImage)
+    camera.stop_preview()
+    print("\t finished medium quality")
+
+    #camera.resolution = (640, 480)
+    camera.start_preview()
+    cnt = 0
     while(cnt<6):
         cnt = cnt + 1
         sleep(.2)
@@ -174,6 +196,9 @@ def takePictures(height, width):
         print(currImage)
         camera.capture(currImage)
     camera.stop_preview()
+    print("\t finished medium quality")
+
+
 def set_params():
   ''' prompts user to set all parameters on the physical interface '''
   global initialPotValues
