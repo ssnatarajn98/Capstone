@@ -167,7 +167,7 @@ def takePictures(height, width):
     while(5):
         cnt = cnt + 1
         sleep(.2)
-        currImage = "/home/pi/Desktop/OutdoorTestImages/height-" + str(height)+"/"+"width-"+str(width)+"/"+str(cnt)
+        currImage = "/home/pi/Desktop/OutdoorTestImages/height-" + str(normHeight)+"/"+"width-"+str(normWidth)+"/"+str(cnt)
         print(currImage)
         camera.capture(currImage)
         print("printed %s photos" % cnt)
