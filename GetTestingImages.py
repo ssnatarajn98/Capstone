@@ -227,7 +227,7 @@ def button_reset_cb():
   ''' callback function to allow user to set parameters again '''
   print("\nDevice reset triggered!\n")
   reset_params()
-  set_from_cached_params()
+  #set_from_cached_params()
   set_params()
 
 toggleButton.when_pressed = toggle_cb
