@@ -51,31 +51,8 @@ def adjustedValue(val):
 
 def takePictures(height, width):
     global lowCamera
-
-    '''
-    resetButtonVal = True
     normHeight = adjustedValue(height)
     normWidth = adjustedValue(width)
-    highCamera.start_preview()
-    cnt = 0
-    while(cnt<3):
-        cnt = cnt + 1
-        currImage = "/home/pi/Desktop/OutdoorTestImages/height-" + str(normHeight)+"/"+"width-"+str(normWidth)+"/high-"+str(cnt)+".jpg"
-        highCamera.capture(currImage)
-    highCamera.stop_preview()
-    print("\t finished high quality")
-
-
-    mediumCamera.start_preview()
-    cnt = 0
-    while(cnt<3):
-        cnt = cnt + 1
-        currImage = "/home/pi/Desktop/OutdoorTestImages/height-" + str(normHeight)+"/"+"width-"+str(normWidth)+"/medium-"+str(cnt)+".jpg"
-        mediumCamera.capture(currImage)
-    mediumCamera.stop_preview()
-    print("\t finished medium quality")
-
-    '''
     lowCamera.start_preview()
     cnt = 0
     while(cnt<3):
