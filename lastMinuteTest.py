@@ -7,10 +7,7 @@ import display
 
 lowCamera = PiCamera()
 lowCamera.resolution =  (640, 480)
-mediumCamera = PiCamera()
-mediumCamera.resolution = (1280, 960)
-highCamera = PiCamera()
-highCamera.resolution = (2592, 1944)
+
 
 
 
@@ -54,9 +51,8 @@ def adjustedValue(val):
 
 def takePictures(height, width):
     global lowCamera
-    global mediumCamera
-    global highCamera
-    glob
+
+    '''
     resetButtonVal = True
     normHeight = adjustedValue(height)
     normWidth = adjustedValue(width)
@@ -79,7 +75,7 @@ def takePictures(height, width):
     mediumCamera.stop_preview()
     print("\t finished medium quality")
 
-
+    '''
     lowCamera.start_preview()
     cnt = 0
     while(cnt<3):
