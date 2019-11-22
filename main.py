@@ -97,7 +97,7 @@ def take_param_reading():
   '''
   global paramStep
 
-  if paramStep > constants.NUM_PARAMS:
+  if paramStep > constants.NUM_PARAMS - 1:
     return 0
   
   # takes a value from 0 to 100
