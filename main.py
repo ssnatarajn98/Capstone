@@ -31,6 +31,7 @@ initialPotValues = []
 # parameter selection
 params = [0] * constants.NUM_PARAMS # initialize to zero
 paramStep = 0
+currentlyToggling = True
 
 ''' AUXILIARY FUNCTIONS '''
 def set_from_cached_params():
@@ -150,7 +151,9 @@ def toggle_cb():
   sleep(0.2)
 
   # ready to read the next parameter
-  if paramStep < constants.NUM_PARAMS - 1:
+  if paramStep == constants.NUM_PARAMS - 1:
+    currentlyToggling = False
+  else:
     paramStep += 1
 
 def reset_params():
@@ -158,10 +161,12 @@ def reset_params():
   global params
   global paramStep
   global initialPotValues
+  global currentlyToggling
 
   params = [0] * constants.NUM_PARAMS
   paramStep = 0
   initialPotValues = []
+  currentlyToggling = True
 
   print("\tParameters reset.")
 
@@ -171,7 +176,7 @@ def set_params():
   print("Please enter parameters on the physical interface.\n")
   # set initial pot value for first param
   initialPotValues.append([read_pot(), False]) # [val, changed?]
-  while paramStep < constants.NUM_PARAMS:
+  while currentlyToggling:
     #print(read_pot())
     if not initialPotValues[paramStep][1]:
       if abs(read_pot() - initialPotValues[paramStep][0]) < constants.POT_MOVEMENT_TOLERANCE:
