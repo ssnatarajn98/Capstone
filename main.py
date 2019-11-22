@@ -97,11 +97,12 @@ def take_param_reading():
   '''
   global paramStep
 
-  if paramStep > constants.NUM_PARAMS - 1:
+  if paramStep >= constants.NUM_PARAMS:
     return 0
   
   # takes a value from 0 to 100
   reading = read_pot() * 100
+  print(paramStep)
   if constants.PARAM_TYPES[paramStep] == 0:
     # want a value from 0.0 to 10.0
     return float(int(reading) / 10.0)
