@@ -102,7 +102,6 @@ def take_param_reading():
   
   # takes a value from 0 to 100
   reading = read_pot() * 100
-  print(paramStep)
   if constants.PARAM_TYPES[paramStep] == 0:
     # want a value from 0.0 to 10.0
     return float(int(reading) / 10.0)
@@ -151,7 +150,8 @@ def toggle_cb():
   sleep(0.2)
 
   # ready to read the next parameter
-  paramStep += 1
+  if paramStep < constants.NUM_PARAMS - 1:
+    paramStep += 1
 
 def reset_params():
   ''' resets all parameters to zero '''
