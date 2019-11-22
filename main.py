@@ -132,7 +132,7 @@ def toggle_cb():
   global currentlyToggling
 
   # ignore button presses after all parameters have been set
-  if paramStep >= constants.NUM_PARAMS or currentlyToggling:
+  if paramStep >= constants.NUM_PARAMS or not currentlyToggling:
     return
 
   # read from the pot and save the value
