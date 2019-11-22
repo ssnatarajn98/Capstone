@@ -129,6 +129,7 @@ def toggle_cb():
   ''' saves the parameter value and toggles to the next parameter to be entered '''
   global params
   global paramStep
+  global currentlyToggling
 
   # ignore button presses after all parameters have been set
   if paramStep >= constants.NUM_PARAMS:
