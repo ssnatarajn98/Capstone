@@ -20,19 +20,21 @@ import gpiozero # uses BCM numbering by default
 import constants
 import display
 
-print("Configuring Pi...")
+print("Configuring Pi...\n")
 
 # 7 segment type configuration
 if len(sys.argv) != 2:
-  print("Specify COMMON-CATHODE or COMMON-ANODE using 0 or 1, respectively")
-  print("Ex: python main.py 0")
+  print("Specify COMMON-CATHODE or COMMON-ANODE using c or a, respectively")
+  print("Ex: python main.py c")
   exit()
 else:
-  if sys.argv[1] != 0 or sys.argv[1] != 1:
-    print("use a 1 or 0 you idiot")
-    exit()
+  if sys.argv[1] != 'c':
+    constants.SEGMENT_TYPE = 0
+  elif sys.argv[1] != 'a':
+    constants.SEGMENT_TYPE = 1
   else:
-    constants.SEGMENT_TYPE = sys.argv[1]
+    print("use a 'c' or 'a' you idiot")
+    exit()
 print("Using " + "common-cathode" if constants.SEGMENT_TYPE == 0 else "common-anode" + " configuration.")
 
 ''' GLOBAL VARIABLES '''
