@@ -27,11 +27,9 @@ if len(sys.argv) != 2:
   print("Ex: python main.py c")
   exit()
 else:
-  if sys.argv[1] != 'c':
-    print('c??')
+  if sys.argv[1] == 'c':
     constants.SEGMENT_TYPE = 0
-  elif sys.argv[1] != 'a':
-    print('a!')
+  elif sys.argv[1] == 'a':
     constants.SEGMENT_TYPE = 1
   else:
     print("use a 'c' or 'a' you idiot")
