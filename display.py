@@ -128,4 +128,6 @@ def set_display(vals):
     #sleep(0.001)
 
 def clear():
-  set_individual(3, ' ')
+  # disable all digits
+  for d in range(len(digits)):
+    digits_disable[d]()
