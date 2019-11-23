@@ -22,6 +22,7 @@ import display
 
 print("Configuring Pi...")
 
+# 7 segment type configuration
 if len(sys.argv) != 2:
   print("Specify COMMON-CATHODE or COMMON-ANODE using 0 or 1, respectively")
   print("Ex: python main.py 0")
