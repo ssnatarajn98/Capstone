@@ -30,6 +30,7 @@ else:
   if sys.argv[1] != 'c':
     constants.SEGMENT_TYPE = 0
   elif sys.argv[1] != 'a':
+    print('here!')
     constants.SEGMENT_TYPE = 1
   else:
     print("use a 'c' or 'a' you idiot")
