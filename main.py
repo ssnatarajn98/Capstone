@@ -71,7 +71,7 @@ def set_from_cached_params():
 def set_params_to_cache():
   global params
 
-  print("Saving parameters to cache...")
+  print("\nSaving parameters to cache...")
 
   f = open(constants.CACHE_FILENAME, "w") # will create if nonexistant
   for val in params:
@@ -174,7 +174,7 @@ def reset_params():
 def set_params():
   ''' prompts user to set all parameters on the physical interface '''
   global initialPotValues
-  print("Please enter parameters on the physical interface.\n")
+  print("\nPlease enter parameters on the physical interface.\n")
   # set initial pot value for first param
   initialPotValues.append([read_pot(), False]) # [val, changed?]
   while currentlyToggling:
