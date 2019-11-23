@@ -19,7 +19,7 @@ import gpiozero # uses BCM numbering by default
 # importing local files
 import constants
 
-print("Configuring Pi...\n")
+print("Configuring Pi...")
 
 # 7 segment type configuration
 if len(sys.argv) != 2:
@@ -34,7 +34,7 @@ else:
   else:
     print("use a 'c' or 'a' you idiot")
     exit()
-print("Using " + "common-cathode" if constants.SEGMENT_TYPE == 0 else "common-anode" + " configuration.")
+print("Using 7-segment " + "common-cathode" if constants.SEGMENT_TYPE == 0 else "common-anode" + " configuration.\n")
 
 # now set up display
 import display
@@ -58,7 +58,7 @@ def set_from_cached_params():
   '''
   global params
 
-  print("Pulling cached parameters...")
+  print("\nPulling cached parameters...")
 
   # see if file exists first
   if not path.exists(constants.CACHE_FILENAME):
