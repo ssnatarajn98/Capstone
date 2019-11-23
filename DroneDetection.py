@@ -4,11 +4,8 @@ import os.path
 from os import path
 import csv
 
-
-
 rightEdge = {}
 leftEdge = {}
-
 
 #get boundary with image without drone
 def isBlack(pVal):
@@ -40,6 +37,37 @@ def getBoundary(path):
         im.putpixel((int(rightEdge[h]),int(h)),(255,0,0,255))
     im.show()'''
         
+def getBoundaryTriangle(path):
+    print("called")
+    im = Image.open(path,"r")
+    width, height = im.size
+    px = im.load()
+    x0 = 200.0
+    x1 = 10
+    y0 = 0.0
+    y1 = 200.0
+    im.putpixel( ( int(x0),int(y0) ) ,(255,0,0,255) )
+    im.putpixel( (int(x1),int(y1) ) , (255,0,0,255) )
+    im.show()
+    dx =  x1 - x0
+    dy = y1 - y0
+    de = abs(dy/dx)
+    e = 0.0
+    tmpY = y1
+    cnt = -1
+    for ych in range(0,480):
+        im.putpixel((20,ych),(255,0,0,255))
+    tmpX = x1
+    while tmpX < x0:
+        tmpX = tmpX + 1
+        im.putpixel((tmpX,int(tmpY)),(255,0,0,255))
+        if(cnt==-1):
+            tmpY = tmpY-1
+        else:
+            tmpY = tmpY - 2
+        cnt = cnt * -1
+    im.show()
+    
 
 def Average(lst):
     return sum(lst) / len(lst)
@@ -93,10 +121,10 @@ def getAllData():
                 WR[str(j)] = stringPoint
             writer.writerow(WR)
         csvfile.close()
-'''getBoundary("C:\Users\Sriram\Desktop\capstone\OutdoorTestImages\OutdoorTestImages\height-40\width-40\low-1.jpg") - lowQualityNoDrone
-print(rightEdge)
+getBoundaryTriangle("C:\Users\Sriram\Desktop\capstone\LowQualityRefined\OutdoorTestImages\height-40\width-40\low-1.jpg")
+'''print(rightEdge)
 print(leftEdge)
 o = detectDrone("C:\Users\Sriram\Desktop\capstone\OutdoorTestImages\OutdoorTestImages\height-50\width-30\low-1.jpg")
-print(o)'''
+print(o)
 getAllData()
-print("done")
+print("done")'''
