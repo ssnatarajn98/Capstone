@@ -43,7 +43,7 @@ import display
 # buttons
 toggleButton = gpiozero.Button(constants.TOGGLE_BUTTON)
 resetButton = gpiozero.Button(constants.RESET_BUTTON, hold_time=2)
-GPIO.setup(constants.LED,GPIO.OUT)
+led = LED(constants.LED_PORT)
 # knob
 pot = gpiozero.MCP3008(channel=0)
 initialPotValues = []
@@ -259,9 +259,9 @@ print("Configuration complete.")
 
 ''' BEGIN SCRIPT '''
 for i in range(10):
-  GPIO.output(led, GPIO.HIGH)
-  time.sleep(0.2)
-  GPIO.output(led, GPIO.LOW)
+  led.on()
+  time.sleep(1)
+  led.off()
   time.sleep(0.2)
 
 set_from_cached_params()
