@@ -34,7 +34,7 @@ else:
   else:
     print("use a 'c' or 'a' you idiot")
     exit()
-print("Using 7-segment " + "common-cathode" if constants.SEGMENT_TYPE == 0 else "common-anode" + " configuration.\n")
+print("Using 7-segment " + ("common-cathode" if constants.SEGMENT_TYPE == 0 else "common-anode") + " configuration.\n")
 
 # now set up display
 import display
