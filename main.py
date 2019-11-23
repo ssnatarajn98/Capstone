@@ -13,6 +13,7 @@ from time import sleep
 from signal import pause
 import os.path
 from os import path
+import sys
 # raspberry pi packages
 import gpiozero # uses BCM numbering by default
 # importing local files
@@ -20,6 +21,18 @@ import constants
 import display
 
 print("Configuring Pi...")
+
+if len(sys.argv) != 2:
+  print("Specify COMMON-CATHODE or COMMON-ANODE using 0 or 1, respectively")
+  print("Ex: python main.py 0")
+  exit()
+else:
+  if sys.argv[1] != 0 or sys.argv[1] != 1:
+    print("use a 1 or 0 you idiot")
+    exit()
+  else:
+    constants.SEGMENT_TYPE = sys.argv[1]
+print("Using " + "common-cathode" if constants.SEGMENT_TYPE == 0 else "common-anode" + " configuration.")
 
 ''' GLOBAL VARIABLES '''
 # buttons

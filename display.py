@@ -54,7 +54,7 @@ digits_enable = []
 digits_disable = []
 dot_enable = None
 dot_disable = None
-if constants.SEGMENT_TYPE == "COMMON CATHODE":
+if constants.SEGMENT_TYPE == 0:
   for seg in segments:
     segments_enable.append(seg.on)
     segments_disable.append(seg.off)
@@ -63,7 +63,7 @@ if constants.SEGMENT_TYPE == "COMMON CATHODE":
     digits_disable.append(dig.on)
   dot_enable = dot.on
   dot_disable = dot.off
-elif constants.SEGMENT_TYPE == "COMMON ANODE":
+elif constants.SEGMENT_TYPE == 1:
   for seg in segments:
     segments_enable.append(seg.off)
     segments_disable.append(seg.on)
