@@ -18,7 +18,6 @@ import sys
 import gpiozero # uses BCM numbering by default
 # importing local files
 import constants
-import display
 
 print("Configuring Pi...\n")
 
@@ -36,6 +35,9 @@ else:
     print("use a 'c' or 'a' you idiot")
     exit()
 print("Using " + "common-cathode" if constants.SEGMENT_TYPE == 0 else "common-anode" + " configuration.")
+
+# now set up display
+import display
 
 ''' GLOBAL VARIABLES '''
 # buttons
