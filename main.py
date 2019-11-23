@@ -43,7 +43,7 @@ import display
 # buttons
 toggleButton = gpiozero.Button(constants.TOGGLE_BUTTON)
 resetButton = gpiozero.Button(constants.RESET_BUTTON, hold_time=2)
-led = LED(constants.LED_PORT)
+led = gpiozero.LED(constants.LED_PORT)
 # knob
 pot = gpiozero.MCP3008(channel=0)
 initialPotValues = []
