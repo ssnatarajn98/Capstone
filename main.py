@@ -28,9 +28,10 @@ if len(sys.argv) != 2:
   exit()
 else:
   if sys.argv[1] != 'c':
+    print('c??')
     constants.SEGMENT_TYPE = 0
   elif sys.argv[1] != 'a':
-    print('here!')
+    print('a!')
     constants.SEGMENT_TYPE = 1
   else:
     print("use a 'c' or 'a' you idiot")
