@@ -128,4 +128,4 @@ def set_display(vals):
     #sleep(0.001)
 
 def clear():
-  set_display([' '] * 4)
+  set_individual(3, ' ')
