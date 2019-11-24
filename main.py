@@ -258,7 +258,7 @@ resetButton.when_held = button_reset_cb
 print("Configuration complete.")
 
 ''' BEGIN SCRIPT '''
-  led.on()
+led.on()
 
 set_from_cached_params()
 set_params()
