@@ -258,11 +258,7 @@ resetButton.when_held = button_reset_cb
 print("Configuration complete.")
 
 ''' BEGIN SCRIPT '''
-for i in range(10):
   led.on()
-  sleep(1)
-  led.off()
-  sleep(1)
 
 set_from_cached_params()
 set_params()
