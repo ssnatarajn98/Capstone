@@ -7,6 +7,7 @@ import csv
 rightEdge = {}
 leftEdge = {}
 backgroundImagePath = ""
+#camera = PiCamera()
 
 #get boundary with image without drone
 def isBlack(pVal):
@@ -150,8 +151,47 @@ def getAllData():
             writer.writerow(WR)
         csvfile.close()
 
-
+def takePicture():
+    global camera
+    camera.start_preview()
+    cnt = cnt + 1
+    currImage = "/home/pi/Desktop/im.jpg"
+    lowCamera.capture(currImage)
+    lowCamera.stop_preview()
+def writeToText():
+    global rightEdge
+    global leftEdge     
+    getBoundaryTriangle("C:\Users\Sriram\Desktop\capstone\LowQualityRefined\OutdoorTestImages\height-40\width-40\low-1.jpg")
+    File_object = open(r"C:\\Users\\Sriram\\Desktop\\final\\Capstone\\distance.txt","w+")
+    for h in range(480):
+        s = str(int(h))+"\t"+str(int(leftEdge[h])) + "\t" + str(int(rightEdge[h])) +"\n"
+        File_object.write(s)
+    
+    File_object.close()
+    
+def readText():
+    global rightEdge
+    global leftEdge 
+    f = open("C:\\Users\\Sriram\\Desktop\\final\\Capstone\\distance.txt","r+")  
+    line = f.readline()
+    while line:
+        words = line.split('\t')
+        words[2] = words[:-2]
+        leftEdge[int(words[0])] = int(words[1])
+        rightEdge[int(words[0])] = int(words[2][0])
+        line = f.readline()
+    f.close()
+    
+def getDistance(loc):
+    return math.sqrt((loc[0] - 320)**2 + (loc[1] - 240)**2) 
 def isInRange(height,width):
+    takePicture()
+    #readText()
+    loc = detectDrone("/home/pi/Desktop/im.jpg")
+    dist = getDistance(loc)
+    
     return False
+#writeToText()
+readText()
     
     
