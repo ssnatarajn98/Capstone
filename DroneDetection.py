@@ -4,6 +4,7 @@ import os.path
 from os import path
 import csv
 import constants
+from picamera import PiCamera
 
 
 #checkWidth ----------------
