@@ -85,8 +85,8 @@ def takePicture():
     global camera
     camera.start_preview()
     currImage = constants.IMAGE_FILENAME
-    lowCamera.capture(currImage)
-    lowCamera.stop_preview()
+    camera.capture(currImage)
+    camera.stop_preview()
     
 def getDistance(loc):
     return math.sqrt((loc[0] - 320)**2 + (loc[1] - 240)**2) 
