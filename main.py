@@ -100,7 +100,11 @@ def set_params_to_cache():
   print("\nSaving parameters to cache...")
 
   f = open(constants.CACHE_FILENAME, "w") # will create if nonexistant
-  for val in params:
+  for i, val in enumerate(params):
+    if val < constants.PARAM_ACCEPTABLE_RANGES[i][0]:
+      val = constants.PARAM_ACCEPTABLE_RANGES[i][0]
+    elif val > constants.PARAM_ACCEPTABLE_RANGES[i][1]:
+      val = constants.PARAM_ACCEPTABLE_RANGES[i][1]
     f.write(str(val) + "\n")
   f.close()
 
