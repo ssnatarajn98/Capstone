@@ -3,6 +3,7 @@ import math
 import os.path
 from os import path
 import csv
+import constants
 
 rightEdge = {}
 leftEdge = {}
@@ -186,10 +187,14 @@ def getDistance(loc):
 
 def isInRange(height,width):
     takePicture()
-    #readText()
-    loc = detectDrone("/home/pi/Desktop/im.jpg")
+    loc = detectDrone(constants.IMAGE_FILENAME)
+    if(loc[0] <5 and loc[1] <5):
+        return False
     dist = getDistance(loc)
-    return False
+    actualWdith = getWidth(dist,height)
+    if actualWidth > width:
+        return False
+    return True
     
 #writeToText()
 readText()
