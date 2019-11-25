@@ -53,6 +53,7 @@ paramStep = 0
 currentlyToggling = True
 # time delay
 timeParameter = constants.PARAM_NAMES.index("Time delay")
+timer = None # will override later with actual time delay
 # LED
 led = gpiozero.LED(constants.LED_PORT)
 droneCount = 0
@@ -192,7 +193,8 @@ def drone_detected_cb():
   global timer
   global led
   led.on()
-  timer.start()
+  if timer != None:
+    timer.start()
   # set current detection count to 7 segment display
   # can only go up to 9
   display.set_individual(3, 9 if droneCount >= 9 else droneCount)
@@ -205,13 +207,16 @@ def reset_params():
   global currentlyToggling
   global timer
   global droneCount
+  global led
 
   params = [0] * constants.NUM_PARAMS
   paramStep = 0
   initialPotValues = []
   currentlyToggling = True
-  timer.cancel()
+  if timer != None:
+    timer.cancel()
   droneCount = 0
+  led.off()
 
   print("\tParameters reset.")
 
@@ -270,7 +275,11 @@ def set_params():
   display.clear()
   set_params_to_cache()
 
-  timer = Timer(params[timeParameter], timer_cb)
+  # set timer if wait time is not indefinite
+  if params[timeParameter] != -1:
+    timer = Timer(params[timeParameter], timer_cb)
+  else:
+    timer = None
 
 def button_reset_cb():
   ''' callback function to allow user to set parameters again '''
@@ -282,7 +291,6 @@ def button_reset_cb():
 ''' SIGNAL CALLBACKS '''
 toggleButton.when_pressed = toggle_cb
 resetButton.when_held = button_reset_cb
-timer = None # will override later with actual time delay
 
 print("Configuration complete.")
 
@@ -298,6 +306,7 @@ while True:
   if DroneDetection.isInRange(
     params[constants.PARAM_HEIGHT_INDEX],
     params[constants.PARAM_WIDTH_INDEX]):
+
     print("Drone detected!")
     droneCount += 1
     drone_detected_cb()
