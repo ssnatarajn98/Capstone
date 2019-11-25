@@ -234,6 +234,6 @@ def isInRange(height,width):
     return True
     
 #writeToText()
-readText()
+#readText()
     
     
