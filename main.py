@@ -238,7 +238,6 @@ def set_params():
   # set initial pot value for first param
   initialPotValues.append([read_pot(), False]) # [val, changed?]
   while currentlyToggling:
-    #print(read_pot())
     if not initialPotValues[paramStep][1]:
       if abs(read_pot() - initialPotValues[paramStep][0]) < constants.POT_MOVEMENT_TOLERANCE:
         # significant movement has not been detected
@@ -275,6 +274,11 @@ def set_params():
       tmp = 1.0 if tmp == 10 else tmp
       # in case of concurrency issues causing floating point to be disregarded
       tmp = float(tmp / 10) if tmp > 10 else tmp
+      # make sure to not got below/under min/max values
+      if tmp < constants.PARAM_ACCEPTABLE_RANGES[paramStep][0]:
+        tmp = constants.PARAM_ACCEPTABLE_RANGES[paramStep][0]
+      elif tmp > constants.PARAM_ACCEPTABLE_RANGES[paramStep][1]:
+        tmp = constants.PARAM_ACCEPTABLE_RANGES[paramStep][1]
       display.set_display([
         paramStep + 1,
         ' ',
