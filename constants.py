@@ -71,8 +71,8 @@ def readText():
     while line:
         words = line.split('\t')
         words[2] = words[:-2]
-        leftEdge[int(words[0])] = int(words[1])
-        rightEdge[int(words[0])] = int(words[2][0])
+        LEFT_EDGE[int(words[0])] = int(words[1])
+        RIGHT_EDGE[int(words[0])] = int(words[2][0])
         line = f.readline()
     f.close()
 readText()
