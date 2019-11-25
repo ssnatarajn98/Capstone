@@ -4,7 +4,7 @@ import os.path
 from os import path
 import csv
 import constants
-import check
+
 
 #checkWidth ----------------
 class dataset:
