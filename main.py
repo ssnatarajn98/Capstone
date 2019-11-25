@@ -193,7 +193,6 @@ def set_timer():
   # set timer if wait time is not indefinite
   if params[timeParameter] != -1:
     timer = Timer(params[timeParameter], timer_cb)
-    print("debug\tsetting timer for "+str(params[2]))
   else:
     timer = None
 
@@ -312,9 +311,8 @@ print("\nSearching for drones...")
 while True:
   if DroneDetection.isInRange(
     params[constants.PARAM_HEIGHT_INDEX],
-    params[constants.PARAM_WIDTH_INDEX]) or True:
+    params[constants.PARAM_WIDTH_INDEX]):
 
     print("Drone detected!")
     droneCount += 1
     drone_detected_cb()
-  sleep(params[2] + 10)
