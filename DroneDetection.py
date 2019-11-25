@@ -150,7 +150,6 @@ def getAllData():
             writer.writerow(WR)
         csvfile.close()
 
-
 def isInRange(height, width):
     return False
     
