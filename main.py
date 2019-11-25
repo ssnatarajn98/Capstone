@@ -193,6 +193,7 @@ def set_timer():
   # set timer if wait time is not indefinite
   if params[timeParameter] != -1:
     timer = Timer(params[timeParameter], timer_cb)
+    print("debug\tsetting timer for "+str(params[2]))
   else:
     timer = None
 
@@ -316,4 +317,4 @@ while True:
     print("Drone detected!")
     droneCount += 1
     drone_detected_cb()
-  sleep(100)
+  sleep(params[2] + 10)
