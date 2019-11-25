@@ -151,6 +151,7 @@ def getAllData():
             writer.writerow(WR)
         csvfile.close()
 
+<<<<<<< HEAD
 def takePicture():
     global camera
     camera.start_preview()
@@ -184,13 +185,14 @@ def readText():
     
 def getDistance(loc):
     return math.sqrt((loc[0] - 320)**2 + (loc[1] - 240)**2) 
+
 def isInRange(height,width):
     takePicture()
     #readText()
     loc = detectDrone("/home/pi/Desktop/im.jpg")
     dist = getDistance(loc)
-    
     return False
+    
 #writeToText()
 readText()
     

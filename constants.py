@@ -7,7 +7,7 @@ Constant values used across all files
 TOGGLE_BUTTON = 24
 RESET_BUTTON = 7
 
-#LED
+# LED
 LED_PORT = 22
 
 # Motor driver
@@ -38,10 +38,8 @@ PARAM_NAMES = [
   "Lateral distance",
   "Time delay"
 ]
-FLIGHT_TEST_NAMES = [
-  "Height",
-  "Width"
-]
+PARAM_HEIGHT_INDEX = 0
+PARAM_WIDTH_INDEX = 1
 # 0: 0.0-10 or 1: 0 to 99
 PARAM_TYPES = [
   0,
@@ -49,7 +47,7 @@ PARAM_TYPES = [
   1
 ]
 PARAM_ACCEPTABLE_RANGES = [
-  [0,10],
+  [4,10],
   [0,10],
   [-1,90]
 ]
