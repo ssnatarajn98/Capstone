@@ -50,8 +50,8 @@ PARAM_TYPES = [
   1
 ]
 PARAM_ACCEPTABLE_RANGES = [
-  [0.5,10.0],
   [4.0,10.0],
+  [0.5,10.0],
   [-1,90]
 ]
 ''' FILES '''
