@@ -63,9 +63,10 @@ DISTANCE_FILENAME = "/home/pi/Desktop/distance.jpg"
 IMAGE_FILENAME = "/home/pi/Desktop/im.jpg"
 
 def readText():
-    global rightEdge
-    global leftEdge 
-    f = open(constants.DISTANCE_FILENAME,"r+")  
+    global RIGHT_EDGE
+    global LEFT_EDGE 
+    global DISTANCE_FILENAME
+    f = open(DISTANCE_FILENAME,"r+")  
     line = f.readline()
     while line:
         words = line.split('\t')

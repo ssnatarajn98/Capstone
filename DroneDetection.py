@@ -56,8 +56,8 @@ def Average(lst):
     return sum(lst) / len(lst)
 
 def detectDrone(p):
-    global rightEdge
-    global leftEdge
+    rightEdge = constants.RIGHT_EDGE
+    leftEdge = constants.LEFT_EDGE
     im = Image.open(p,"r")
     width, height = im.size
     px = im.load()    
