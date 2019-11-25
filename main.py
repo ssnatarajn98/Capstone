@@ -305,8 +305,9 @@ print("\nSearching for drones...")
 while True:
   if DroneDetection.isInRange(
     params[constants.PARAM_HEIGHT_INDEX],
-    params[constants.PARAM_WIDTH_INDEX]):
+    params[constants.PARAM_WIDTH_INDEX]) or True:
 
     print("Drone detected!")
     droneCount += 1
     drone_detected_cb()
+  sleep(10)
