@@ -150,8 +150,6 @@ def getAllData():
                 WR[str(j)] = stringPoint
             writer.writerow(WR)
         csvfile.close()
-
-<<<<<<< HEAD
 def takePicture():
     global camera
     camera.start_preview()
