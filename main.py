@@ -243,6 +243,7 @@ def set_params():
   ''' prompts user to set all parameters on the physical interface '''
   global initialPotValues
   global timer
+  global params
   print("\nPlease enter parameters on the physical interface.\n")
   # set initial pot value for first param
   initialPotValues.append([read_pot(), False]) # [val, changed?]
@@ -299,6 +300,12 @@ def set_params():
   set_params_to_cache()
 
   set_timer()
+  
+  # FIXME!
+  if params[0] < 4.0:
+    params[0] = 4.0
+  
+  sleep(10)
 
 def button_reset_cb():
   ''' callback function to allow user to set parameters again '''
