@@ -47,7 +47,7 @@ PARAM_TYPES = [
   1
 ]
 PARAM_ACCEPTABLE_RANGES = [
-  [0,10],
+  [4,10],
   [0,10],
   [-1,90]
 ]

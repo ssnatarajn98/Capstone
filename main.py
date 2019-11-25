@@ -188,12 +188,22 @@ def timer_cb():
   print("\nTimer done, resetting LEDs.\n")
   led.off()
 
+def set_timer():
+  global timer
+  # set timer if wait time is not indefinite
+  if params[timeParameter] != -1:
+    timer = Timer(params[timeParameter], timer_cb)
+  else:
+    timer = None
+
 def drone_detected_cb():
   ''' callback function once drone has been detected by camera '''
   global timer
   global led
   led.on()
   if timer != None:
+    # create new timer thread to run
+    set_timer()
     timer.start()
   # set current detection count to 7 segment display
   # can only go up to 9
@@ -275,11 +285,7 @@ def set_params():
   display.clear()
   set_params_to_cache()
 
-  # set timer if wait time is not indefinite
-  if params[timeParameter] != -1:
-    timer = Timer(params[timeParameter], timer_cb)
-  else:
-    timer = None
+  set_timer()
 
 def button_reset_cb():
   ''' callback function to allow user to set parameters again '''
@@ -310,4 +316,4 @@ while True:
     print("Drone detected!")
     droneCount += 1
     drone_detected_cb()
-  sleep(10)
+  sleep(100)
