@@ -45,6 +45,7 @@ def getWidth(distance, height):
 rightEdge = {}
 leftEdge = {}
 camera = PiCamera()
+camera.resolution =  (640, 480)
 
 #get boundary with image without drone
 
@@ -97,9 +98,15 @@ def getDistance(loc):
 def isInRange(height,width):
     takePicture()
     loc = detectDrone(constants.IMAGE_FILENAME)
+    print("x")
+    print(loc[0])
+    print("y")
+    print(loc[1])
     if(loc[0] <5 and loc[1] <5):
         return False
     dist = getDistance(loc)
+    print("dist")
+    print(dist)
     actualWidth = getWidth(dist,height)
     print("finished analysis")
     if actualWidth > width:
