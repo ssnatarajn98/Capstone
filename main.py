@@ -56,6 +56,7 @@ timeParameter = constants.PARAM_NAMES.index("Time delay")
 timer = None # will override later with actual time delay
 # LED
 led = gpiozero.LED(constants.LED_PORT)
+waitingOnTimer = False
 droneCount = 0
 
 ''' AUXILIARY FUNCTIONS '''
@@ -185,8 +186,11 @@ def toggle_cb():
 def timer_cb():
   ''' callback function once timer has expired '''
   global led
+  global waitingOnTimer
+
   print("\nTimer done, resetting LEDs.\n")
   led.off()
+  waitingOnTimer = False
 
 def set_timer():
   global timer
@@ -200,7 +204,10 @@ def drone_detected_cb():
   ''' callback function once drone has been detected by camera '''
   global timer
   global led
+  global waitingOnTimer
+
   led.on()
+  waitingOnTimer = True
   if timer != None:
     # create new timer thread to run
     set_timer()
@@ -218,6 +225,7 @@ def reset_params():
   global timer
   global droneCount
   global led
+  global waitingOnTimer
 
   params = [0] * constants.NUM_PARAMS
   paramStep = 0
@@ -227,6 +235,7 @@ def reset_params():
     timer.cancel()
   droneCount = 0
   led.off()
+  waitingOnTimer = False
 
   print("\tParameters reset.")
 
@@ -313,10 +322,11 @@ set_params()
 # start looking for drones
 print("\nSearching for drones...")
 while True:
-  if DroneDetection.isInRange(
-    params[constants.PARAM_HEIGHT_INDEX],
-    params[constants.PARAM_WIDTH_INDEX]):
+  if not waitingOnTimer:
+    if DroneDetection.isInRange(
+      params[constants.PARAM_HEIGHT_INDEX],
+      params[constants.PARAM_WIDTH_INDEX]):
 
-    print("Drone detected!")
-    droneCount += 1
-    drone_detected_cb()
+      print("Drone detected!")
+      droneCount += 1
+      drone_detected_cb()
