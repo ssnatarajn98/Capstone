@@ -10,14 +10,15 @@ print("Importing packages...")
 ''' IMPORTS '''
 # general packages
 from time import sleep
-from signal import pause
 import os.path
 from os import path
 import sys
+from threading import Timer
 # raspberry pi packages
 import gpiozero # uses BCM numbering by default
 # importing local files
 import constants
+import DroneDetection
 
 print("Configuring Pi...")
 
@@ -43,7 +44,6 @@ import display
 # buttons
 toggleButton = gpiozero.Button(constants.TOGGLE_BUTTON)
 resetButton = gpiozero.Button(constants.RESET_BUTTON, hold_time=2)
-led = gpiozero.LED(constants.LED_PORT)
 # knob
 pot = gpiozero.MCP3008(channel=0)
 initialPotValues = []
@@ -51,6 +51,11 @@ initialPotValues = []
 params = [0] * constants.NUM_PARAMS # initialize to zero
 paramStep = 0
 currentlyToggling = True
+# time delay
+timeParameter = constants.PARAM_NAMES.index("Time delay")
+# LED
+led = gpiozero.LED(constants.LED_PORT)
+droneCount = 0
 
 ''' AUXILIARY FUNCTIONS '''
 def set_from_cached_params():
@@ -176,23 +181,44 @@ def toggle_cb():
   else:
     paramStep += 1
 
+def timer_cb():
+  ''' callback function once timer has expired '''
+  global led
+  print("\nTimer done, resetting LEDs.\n")
+  led.off()
+
+def drone_detected_cb():
+  ''' callback function once drone has been detected by camera '''
+  global timer
+  global led
+  led.on()
+  timer.start()
+  # set current detection count to 7 segment display
+  # can only go up to 9
+  display.set_individual(3, 9 if droneCount >= 9 else droneCount)
+
 def reset_params():
   ''' resets all parameters to zero '''
   global params
   global paramStep
   global initialPotValues
   global currentlyToggling
+  global timer
+  global droneCount
 
   params = [0] * constants.NUM_PARAMS
   paramStep = 0
   initialPotValues = []
   currentlyToggling = True
+  timer.cancel()
+  droneCount = 0
 
   print("\tParameters reset.")
 
 def set_params():
   ''' prompts user to set all parameters on the physical interface '''
   global initialPotValues
+  global timer
   print("\nPlease enter parameters on the physical interface.\n")
   # set initial pot value for first param
   initialPotValues.append([read_pot(), False]) # [val, changed?]
@@ -244,6 +270,8 @@ def set_params():
   display.clear()
   set_params_to_cache()
 
+  timer = Timer(params[timeParameter], timer_cb)
+
 def button_reset_cb():
   ''' callback function to allow user to set parameters again '''
   print("\nDevice reset triggered!\n")
@@ -254,13 +282,22 @@ def button_reset_cb():
 ''' SIGNAL CALLBACKS '''
 toggleButton.when_pressed = toggle_cb
 resetButton.when_held = button_reset_cb
+timer = None # will override later with actual time delay
 
 print("Configuration complete.")
 
 ''' BEGIN SCRIPT '''
-led.on()
-
+# pull parameters from the cache
 set_from_cached_params()
+# initially set all the values
 set_params()
 
-pause() # wait indefinitely
+# start looking for drones
+print("\nSearching for drones...")
+while True:
+  if DroneDetection.isInRange(
+    params[constants.PARAM_HEIGHT_INDEX],
+    params[constants.PARAM_WIDTH_INDEX]):
+    print("Drone detected!")
+    droneCount += 1
+    drone_detected_cb()

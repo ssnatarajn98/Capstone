@@ -151,7 +151,7 @@ def getAllData():
         csvfile.close()
 
 
-def isInRange(height,width):
-    return false
+def isInRange(height, width):
+    return False
     
     
