@@ -51,6 +51,9 @@ camera = PiCamera()
 
 def isRed(pVal):
     return pVal[0]==255 and pVal[1] == 0 and pVal[2] == 0
+
+def isBlack(pVal):
+    return pVal[0] < 100 and pVal[1] < 100 and pVal[2] < 100
     
 def Average(lst):
     return sum(lst) / len(lst)
