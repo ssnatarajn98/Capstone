@@ -100,7 +100,8 @@ def isInRange(height,width):
     if(loc[0] <5 and loc[1] <5):
         return False
     dist = getDistance(loc)
-    actualWdith = getWidth(dist,height)
+    actualWidth = getWidth(dist,height)
+    print("finished analysis")
     if actualWidth > width:
         return False
     return True
