@@ -30,6 +30,9 @@ SEGMENT_F = 13
 SEGMENT_G = 6
 SEGMENT_DOT = 5
 
+RIGHT_EDGE = {}
+LEFT_EDGE = {}
+
 ''' PARAMETER SELECTION '''
 NUM_PARAMS = 3
 TEST_PARAMS = 2
@@ -58,3 +61,16 @@ CACHE_FILENAME = "cached_parameters.txt"
 POT_MOVEMENT_TOLERANCE = 0.05
 DISTANCE_FILENAME = "/home/pi/Desktop/distance.jpg"
 IMAGE_FILENAME = "/home/pi/Desktop/im.jpg"
+
+def readText():
+    global rightEdge
+    global leftEdge 
+    f = open(constants.DISTANCE_FILENAME,"r+")  
+    line = f.readline()
+    while line:
+        words = line.split('\t')
+        words[2] = words[:-2]
+        leftEdge[int(words[0])] = int(words[1])
+        rightEdge[int(words[0])] = int(words[2][0])
+        line = f.readline()
+    f.close()
