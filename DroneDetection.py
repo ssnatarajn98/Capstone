@@ -10,7 +10,7 @@ backgroundImagePath = ""
 
 #get boundary with image without drone
 def isBlack(pVal):
-    return pVal[0] < 70 and pVal[1] < 70 and pVal[2] < 70
+    return pVal[0] < 100 and pVal[1] < 100 and pVal[2] < 100
 def isRed(pVal):
     return pVal[0]==255 and pVal[1] == 0 and pVal[2] == 0
     
@@ -20,6 +20,8 @@ def getBoundary(path):
     global leftEdge
     im = Image.open(path,"r")
     width, height = im.size
+    print(width)
+    print(height)
     px = im.load()
     for h in range(height):
         w = math.floor(width/2)
@@ -40,9 +42,12 @@ def getBoundary(path):
 def getBoundaryTriangle(path):
     global rightEdge
     global leftEdge    
+  
     print("called")
     im = Image.open(path,"r")
     width, height = im.size
+    print(width)
+    print(height)      
     px = im.load()
     x0 = 20
     y0 = 150
@@ -106,18 +111,17 @@ def detectDrone(p):
     black_y = []
     black_x = []
     for h in range(5,height-5):
-        
         for w in range(int(leftEdge[h]+1),int(rightEdge[h]-1)):
             '''if w == int(leftEdge[h] + 1) or w == int(rightEdge[h] - 2):
                 im.putpixel((w,h),(0,255,0,255))'''
             r,g,b = px[w,h]
             if isBlack([r,g,b]):
-                ##im.putpixel((w,h),(255,0,0,255))
+                im.putpixel((w,h),(255,0,0,255))
                 black_y.append(h)
                 black_x.append(w)
     output = []
     xCord = -1
-    xCord = -1
+    yCord = -1
     if len(black_y) != 0:
         xCord = Average(black_x)
         yCord = Average(black_y)
@@ -128,8 +132,7 @@ def detectDrone(p):
 
 def getAllData():
     getBoundaryTriangle("C:\Users\Sriram\Desktop\capstone\LowQualityRefined\OutdoorTestImages\height-40\width-40\low-1.jpg")
-    
-    with open('C:\Users\Sriram\\Desktop\\capstone\\Capstone\\Testing2.csv', 'w') as csvfile:
+    with open('C:\\Users\\Sriram\\Desktop\\final\\Testing2.csv', 'w') as csvfile:
         fieldnames = ['height', '30','40','50','60','70','80','90','100']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames) 
         writer.writeheader()
@@ -146,10 +149,9 @@ def getAllData():
                 WR[str(j)] = stringPoint
             writer.writerow(WR)
         csvfile.close()
-#getBoundaryTriangle("C:\Users\Sriram\Desktop\capstone\LowQualityRefined\OutdoorTestImages\height-40\width-40\low-1.jpg")
-'''print(rightEdge)
-print(leftEdge)'''
-#o = detectDrone("C:\Users\Sriram\Desktop\capstone\LowQualityRefined\OutdoorTestImages\height-50\width-30\low-1.jpg")
 
-getAllData()
-print("done")
+
+def isInRange(height,width):
+    return false
+    
+    
