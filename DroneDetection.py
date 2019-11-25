@@ -64,7 +64,7 @@ def detectDrone(p):
     black_y = []
     black_x = []
     for h in range(5,height-5):
-        for w in range(int(leftEdge[h]+1),int(rightEdge[h]-1)):
+        for w in range((int(leftEdge[h])+1)),(int(rightEdge[h])-1))):
             r,g,b = px[w,h]
             if isBlack([r,g,b]):
                 im.putpixel((w,h),(255,0,0,255))
