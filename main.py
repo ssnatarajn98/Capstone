@@ -18,7 +18,7 @@ from threading import Timer
 import gpiozero # uses BCM numbering by default
 # importing local files
 import constants
-#import DroneDetection
+import DroneDetection
 
 print("Configuring Pi...")
 
