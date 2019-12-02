@@ -241,7 +241,7 @@ def reset_params():
     timer.cancel()
   droneCount = 0
   led.off()
-  waitingOnTimer = False
+  waitingOnTimer = True
 
   print("\tParameters reset.")
 
@@ -250,6 +250,7 @@ def set_params():
   global initialPotValues
   global timer
   global params
+  global waitingOnTimer
   print("\nPlease enter parameters on the physical interface.\n")
   # set initial pot value for first param
   initialPotValues.append([read_pot(), False]) # [val, changed?]
@@ -312,6 +313,7 @@ def set_params():
     params[0] = 4.0
   
   sleep(10)
+  waitingOnTimer = False
 
 def button_reset_cb():
   ''' callback function to allow user to set parameters again '''
