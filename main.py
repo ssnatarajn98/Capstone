@@ -40,8 +40,7 @@ print("Using 7-segment " + ("common-cathode" if constants.SEGMENT_TYPE == 0 else
 # now set up display
 import display
 
-# dictionary setup
-constants.readText()
+
 
 ''' GLOBAL VARIABLES '''
 # buttons

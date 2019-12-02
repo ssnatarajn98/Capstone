@@ -50,8 +50,8 @@ PARAM_TYPES = [
   1
 ]
 PARAM_ACCEPTABLE_RANGES = [
-  [4.0,10.0],
-  [0.5,10.0],
+  [1.0,10.0],
+  [0.0,10.0],
   [-1,90]
 ]
 ''' FILES '''
@@ -75,3 +75,4 @@ def readText():
         RIGHT_EDGE[int(words[0])] = int(words[2][0])
         line = f.readline()
     f.close()
+readText()
