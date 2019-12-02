@@ -75,4 +75,3 @@ def readText():
         RIGHT_EDGE[int(words[0])] = int(words[2][0])
         line = f.readline()
     f.close()
-readText()
