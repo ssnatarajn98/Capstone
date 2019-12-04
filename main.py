@@ -40,8 +40,6 @@ print("Using 7-segment " + ("common-cathode" if constants.SEGMENT_TYPE == 0 else
 # now set up display
 import display
 
-
-
 ''' GLOBAL VARIABLES '''
 # buttons
 toggleButton = gpiozero.Button(constants.TOGGLE_BUTTON)
@@ -314,6 +312,7 @@ def set_params():
   
   sleep(10)
   waitingOnTimer = False
+  display.set_individual(3, 9 if droneCount >= 9 else droneCount)
 
 def button_reset_cb():
   ''' callback function to allow user to set parameters again '''
