@@ -99,8 +99,8 @@ def detectDroneDemo(p):
                 cnt = cnt + 1
 
     if (cnt > 200,000):
-        return True
-    return False
+        return False
+    return True
 
 def takePicture():
     global camera
