@@ -29,7 +29,7 @@ def getWidth(distance, height):
             if i.height == height:
                 length = len(i.data)
                 if distance < i.data[0][1]:
-                    return distance / i.data[0][1] * i.data[0][0] 
+                    return distance / i.data[0][1] * i.data[0][0]
                 if distance > i.data[length-1][1]:
                     return distance / i.data[length-1][1] * i.data[length-1][0]
                 for j in range(1, length):
@@ -54,8 +54,8 @@ def isRed(pVal):
     return pVal[0]==255 and pVal[1] == 0 and pVal[2] == 0
 
 def isBlack(pVal):
-    return pVal[0] < 100 and pVal[1] < 100 and pVal[2] < 100
-    
+    return pVal[0] < 10 and pVal[1] < 10 and pVal[2] < 10
+
 def Average(lst):
     return sum(lst) / len(lst)
 
@@ -64,7 +64,7 @@ def detectDrone(p):
     leftEdge = constants.LEFT_EDGE
     im = Image.open(p,"r")
     width, height = im.size
-    px = im.load()    
+    px = im.load()
     black_y = []
     black_x = []
     for h in range(5,height-5):
@@ -90,44 +90,29 @@ def detectDroneDemo(p):
     leftEdge = constants.LEFT_EDGE
     im = Image.open(p,"r")
     width, height = im.size
-    px = im.load()    
+    px = im.load()
     cnt = 0
     for h in range(5,height-5):
         for w in range( (int(leftEdge[h])+1) , (int(rightEdge[h])-1)  ):
             r,g,b = px[w,h]
             if isBlack([r,g,b]):
-                cnt = cnt + 1 
+                cnt = cnt + 1
 
     if (cnt > 200,000):
         return True
     return False
-        
+
 def takePicture():
     global camera
     camera.start_preview()
     currImage = constants.IMAGE_FILENAME
     camera.capture(currImage)
     camera.stop_preview()
-    
+
 def getDistance(loc):
-    return math.sqrt((loc[0] - 320)**2 + (loc[1] - 240)**2) 
+    return math.sqrt((loc[0] - 320)**2 + (loc[1] - 240)**2)
 
 def isInRange(height,width):
     takePicture()
-    '''loc = detectDrone(constants.IMAGE_FILENAME)
-    print("x")
-    print(loc[0])
-    print("y")
-    print(loc[1])
-    if(loc[0] <5 and loc[1] <5):
-        return False
-    dist = getDistance(loc)
-    print("dist")
-    print(dist)
-    actualWidth = getWidth(dist,height)
-    print("finished analysis")
-    if actualWidth > width:
-        return False
-    return True'''
     return detectDroneDemo(constants.IMAGE_FILENAME)
 
