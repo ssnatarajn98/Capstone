@@ -84,6 +84,23 @@ def detectDrone(p):
     output.append(yCord)
     im.show()
     return output
+
+def detectDroneDemo(p):
+    rightEdge = constants.RIGHT_EDGE
+    leftEdge = constants.LEFT_EDGE
+    im = Image.open(p,"r")
+    width, height = im.size
+    px = im.load()    
+    cnt = 0
+    for h in range(5,height-5):
+        for w in range( (int(leftEdge[h])+1) , (int(rightEdge[h])-1)  ):
+            r,g,b = px[w,h]
+            if isBlack([r,g,b]):
+                cnt = cnt + 1 
+
+    if (cnt > 200,000):
+        return True
+    return False
         
 def takePicture():
     global camera
@@ -97,7 +114,7 @@ def getDistance(loc):
 
 def isInRange(height,width):
     takePicture()
-    loc = detectDrone(constants.IMAGE_FILENAME)
+    '''loc = detectDrone(constants.IMAGE_FILENAME)
     print("x")
     print(loc[0])
     print("y")
@@ -111,7 +128,6 @@ def isInRange(height,width):
     print("finished analysis")
     if actualWidth > width:
         return False
-    return True
-    
-    
-    
+    return True'''
+    return detectDroneDemo(constants.IMAGE_FILENAME)
+
