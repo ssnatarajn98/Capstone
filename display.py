@@ -35,7 +35,6 @@ num = {
   'inf':(1,1,0,0,0,1,1),
   '-1':(1,1,0,0,0,1,1) # alias for inf
 }
-display = [0,0,0,0]
 
 # Using LED to make turning on/off the pins easy
 segments = []
