@@ -85,22 +85,7 @@ def detectDrone(p):
     im.show()
     return output
 
-def detectDroneDemo(p):
-    rightEdge = constants.RIGHT_EDGE
-    leftEdge = constants.LEFT_EDGE
-    im = Image.open(p,"r")
-    width, height = im.size
-    px = im.load()
-    cnt = 0
-    for h in range(5,height-5):
-        for w in range( (int(leftEdge[h])+1) , (int(rightEdge[h])-1)  ):
-            r,g,b = px[w,h]
-            if isBlack([r,g,b]):
-                cnt = cnt + 1
 
-    if (cnt > 200,000):
-        return False
-    return True
 
 def takePicture():
     global camera
